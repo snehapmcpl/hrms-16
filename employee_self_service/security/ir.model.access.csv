@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_employee_tax,hr_employee_tax,model_hr_employee_tax,,1,1,1,1
+access_section24_lines,section24_lines,model_section24_lines,,1,1,1,1
+access_section80c_lines,section80c_lines,model_section80c_lines,,1,1,1,1
+access_chapter6_lines,chapter6_lines,model_chapter6_lines,,1,1,1,1
+access_section10_lines,section10_lines,model_section10_lines,,1,1,1,1
+access_other_income_sources_line,other_income_sources_line,model_other_income_sources_line,,1,1,1,1

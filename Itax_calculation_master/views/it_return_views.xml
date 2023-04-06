@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="it_returns_tree" model="ir.ui.view">
+        <field name="name">it.returns.tree</field>
+        <field name="model">it.returns</field>
+        <field name="arch" type="xml">
+            <tree string="IT Calculation">
+                <field name="employee_id"/>
+                <field name="employee_code"/>
+                <field name="pan_no"/>
+                <field name="tds_computation_month"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="tax_resign_type_name"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="it_returns_form" model="ir.ui.view">
+        <field name="name">it.returns.form</field>
+        <field name="model">it.returns</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="compute_tax_sheet" type="object"
+                            string="Compute Sheet" groups="Itax_calculation_master.group_admin"
+                            data-hotkey="s" class="btn-primary" attrs="{'invisible':[('state','=', 'done')]}"/>
+
+                    <button name="create_older_lines" type="object"
+                            string="Create Older Records" groups="Itax_calculation_master.group_admin"
+                            data-hotkey="o" class="btn-primary" attrs="{'invisible':[('state','=', 'done')]}"/>
+                     <button name="action_confirm" type="object"
+                            string="Confirm" groups="Itax_calculation_master.group_admin"
+                            data-hotkey="o" class="btn-primary" attrs="{'invisible':[('state','=', 'done')]}"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box" groups="Itax_calculation_master.group_admin">
+                            <button name="tds_action" string="TDS" type="object"
+                                    attrs="{'invisible':[('employee_tds_count','=', 0)]}" icon="fa-scissors">
+                                    ( <field name="employee_tds_count" widget="statinfo"/>)
+                            </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="employee_id" required="1" attrs="{'readonly':[('state','=', 'done')]}"/>
+                            <field name="pan_no" attrs="{'readonly':[('state','=', 'done')]}"/>
+                            <field name="birthday" attrs="{'readonly':[('state','=', 'done')]}"/>
+                            <field name="age" attrs="{'readonly':[('state','=', 'done')]}"/>
+                            <field name="tax_resign_type" attrs="{'readonly':[('state','=', 'done')]}"/>
+                            <field name="tax_resign_type_name" invisible="1"/>
+                            <field name="employee_tds_count" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="employee_code" attrs="{'readonly':[('state','=', 'done')]}"/>
+                            <field name="tds_computation_month" attrs="{'readonly':[('state','=', 'done')]}"/>
+                            <field name="date_from" required="1" attrs="{'readonly':[('state','=', 'done')]}"/>
+                            <field name="date_to" required="1" attrs="{'readonly':[('state','=', 'done')]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Gross Annual Income" name="gross_annual_income" groups="Itax_calculation_master.group_admin">
+                            <field name="gross_line_ids" attrs="{'readonly':[('state','=', 'done')]}">
+                                <tree editable="bottom">
+                                    <field name="gross_annual_income"/>
+                                    <field name="amount" string="Amount(₹)"/>
+                                    <field name="it_return_gross" invisible="1"/>
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <label for="gross_total" string="Gross Total" style="font-size: 18px;"/>
+                                <field name="gross_total" style="font-size: 18px;" nolabel="1" />
+                            </group>
+                        </page>
+                        <page string="Section 10(Yearly)" name="section_10" attrs="{'invisible': [('tax_resign_type_name', '!=', 'Old Regime')]}">
+                            <field name="section_10_line_ids" attrs="{'readonly':[('state','=', 'done')]}">
+                                <tree editable="bottom">
+                                    <field name="section_10"/>
+                                    <field name="amount" string="Amount(₹)"/>
+                                    <field name="document" filename="file_name" widget="binary"/>
+                                    <field name="file_name" invisible="1"/>
+                                    <field name="it_return_section10" invisible="1"/>
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <label for="section_10_total" string="Total" style="font-size: 18px;"/>
+                                <field name="section_10_total" style="font-size: 18px;" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Section 16(Yearly)" name="section_16" groups="Itax_calculation_master.group_admin" attrs="{'invisible': [('tax_resign_type_name', '!=', 'Old Regime')]}">
+                            <field name="section_16_line_ids" attrs="{'readonly':[('state','=', 'done')]}">
+                                <tree editable="bottom">
+                                    <field name="section_16"/>
+                                    <field name="amount" string="Amount(₹)"/>
+                                    <field name="it_return_section16" invisible="1"/>
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <label for="section_16_total" string="Total" style="font-size: 18px;"/>
+                                <field name="section_16_total" style="font-size: 18px;" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Income From other sources(Yearly)" name="other_income_sources" >
+                            <field name="other_income_ids" attrs="{'readonly':[('state','=', 'done')]}">
+                                <tree editable="bottom">
+                                    <field name="other_incomes"/>
+                                    <field name="amount" string="Amount(₹)"/>
+                                    <field name="it_return_other_income" invisible="1"/>
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <label for="other_income_total" string="Total" style="font-size: 18px;"/>
+                                <field name="other_income_total" style="font-size: 18px;" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Section 24(Yearly)" name="section_24" attrs="{'invisible': [('tax_resign_type_name', '!=', 'Old Regime')]}">
+                            <field name="section_24_line_ids" attrs="{'readonly':[('state','=', 'done')]}">
+                                <tree editable="bottom">
+                                    <field name="section_24"/>
+                                    <field name="amount" string="Amount(₹)"/>
+                                    <field name="max_limit"/>
+                                    <field name="document" filename="file_name" widget="binary"/>
+                                    <field name="file_name" invisible="1"/>
+                                    <field name="it_return_section24" invisible="1"/>
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <label for="section_24_total" string="Total" style="font-size: 18px;"/>
+                                <field name="section_24_total" style="font-size: 18px;" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Section 80C(Yearly)" name="section_80c" attrs="{'invisible': [('tax_resign_type_name', '!=', 'Old Regime')]}">
+                            <field name="section_80c_line_ids" attrs="{'readonly':[('state','=', 'done')]}">
+                                <tree editable="bottom">
+                                    <field name="section_80c"/>
+                                    <field name="amount" string="Amount(₹)"/>
+                                    <field name="document" filename="file_name" widget="binary"/>
+                                    <field name="file_name" invisible="1"/>
+                                    <field name="it_return_section80c" invisible="1"/>
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <label for="section_80c_total" string="Total" style="font-size: 18px;"/>
+                                <field name="section_80c_total" style="font-size: 18px;" nolabel="1"/>
+                                <label for="section_80c_max_limit" string="Max Limit" style="font-size: 15px;"/>
+                                <field name="section_80c_max_limit" style="font-size: 15px;" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Chapter VI A(Yearly)" name="chapter_vi_a">
+                            <field name="chapter6_line_ids" attrs="{'readonly':[('state','=', 'done')]}">
+                                <tree editable="bottom">
+                                    <field name="chapter6"/>
+                                    <field name="amount" string="Amount(₹)"/>
+                                    <field name="max_limit"/>
+                                    <field name="document" filename="file_name" widget="binary"/>
+                                    <field name="file_name" invisible="1"/>
+                                    <field name="it_return_chapter6" invisible="1"/>
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <label for="chapter6_total" string="Total" style="font-size: 18px;"/>
+                                <field name="chapter6_total" style="font-size: 18px;" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Less: Relief under section 89(Yearly)" name="section_89" groups="Itax_calculation_master.group_admin" attrs="{'invisible': [('tax_resign_type_name', '!=', 'Old Regime')]}">
+                            <group>
+                                <field name="relief_under_section_89" attrs="{'readonly':[('state','=', 'done')]}"/>
+                            </group>
+                        </page>
+                        <page string="Computed Sheet" name="computed_sheet" groups="Itax_calculation_master.group_admin">
+                            <field name="computed_line_ids" widget="one2many_list" attrs="{'readonly':[('state','=', 'done')]}">
+                                <tree editable="bottom" decoration-warning="color == 'brown'"
+                                      decoration-info="color == 'blue'" decoration-bf="color == 'bold'">
+                                    <field name="name"/>
+                                    <field name="amount" string="Amount(₹)"/>
+                                    <field name="amount_total"/>
+                                    <field name="color" invisible="1"/>
+                                    <field name="it_returns_computed" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="action_it_returns">
+        <field name="name">IT Calculation</field>
+        <field name="res_model">it.returns</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Income Tax"
+              id="menu_it_returns_main"
+              web_icon="Itax_calculation_master,static/description/icon.png"
+              sequence="25"
+              groups="Itax_calculation_master.group_admin"/>
+
+    <menuitem name="IT Calculation"
+              parent="menu_it_returns_main"
+              id="menu_it_returns"
+              action="action_it_returns"
+              sequence="1"/>
+
+    <menuitem name="Reporting"
+              parent="menu_it_returns_main"
+              id="menu_it_returns_reporting"
+              sequence="2"/>
+
+    <menuitem name="YTOD Report"
+              parent="menu_it_returns_reporting"
+              id="menu_it_returns_reporting_YTOD"
+              action="Itax_calculation_master.action_YTOD_Wizard"
+              sequence="1"/>
+
+<!--    configuration-->
+    <menuitem name="Configurations"
+              parent="menu_it_returns_main"
+              id="menu_it_returns_configuration"
+              sequence="3"/>
+
+    <menuitem name="Gross Annual Income"
+              parent="menu_it_returns_configuration"
+              id="menu_it_returns_all_taxable_amount"
+              action="Itax_calculation_master.action_it_returns_taxable_income"
+              sequence="1"/>
+    <menuitem name="City Classification"
+              parent="menu_it_returns_configuration"
+              id="menu_it_returns_city_type"
+              action="Itax_calculation_master.action_it_returns_city_type"
+              sequence="2"/>
+    <menuitem name="Section 24"
+              parent="menu_it_returns_configuration"
+              id="menu_it_returns_section_24"
+              action="Itax_calculation_master.action_it_returns_tax_section24"
+              sequence="3"/>
+    <menuitem name="Deduction under Section 80C"
+              parent="menu_it_returns_configuration"
+              id="menu_it_returns_section_80C"
+              action="Itax_calculation_master.action_it_returns_tax_section80c"
+              sequence="4"/>
+<!--    <menuitem name="Additional Deduction under Section 80CCD"-->
+<!--              parent="menu_it_returns_configuration"-->
+<!--              id="menu_it_returns_section_80CCD"-->
+<!--              action="Itax_calculation_master.action_it_returns_tax_section80ccd"-->
+<!--              sequence="5"/>-->
+    <menuitem name="Deduction under Chapter VI A"
+              parent="menu_it_returns_configuration"
+              id="menu_it_returns_chapter_vi_a"
+              action="Itax_calculation_master.action_it_returns_chapter_vi_a"
+              sequence="6"/>
+    <menuitem name="Tax Slab"
+              parent="menu_it_returns_configuration"
+              id="menu_it_returns_tax_slab"
+              action="Itax_calculation_master.action_it_returns_tax_slab"
+              sequence="7"/>
+    <menuitem name="Income From other Sources"
+              parent="menu_it_returns_configuration"
+              id="menu_it_returns_income_source"
+              action="Itax_calculation_master.action_income_sources"
+              sequence="8"/>
+    <menuitem name="Section 10"
+              parent="menu_it_returns_configuration"
+              id="menu_it_returns_section_10"
+              action="Itax_calculation_master.action_it_returns_tax_section10"
+              sequence="9"/>
+    <menuitem name="Section 16"
+              parent="menu_it_returns_configuration"
+              id="menu_it_returns_section_16"
+              action="Itax_calculation_master.action_it_returns_tax_section16"
+              sequence="10"/>
+<!--    <menuitem name="Section 17"-->
+<!--              parent="menu_it_returns_configuration"-->
+<!--              id="menu_it_returns_section_17"-->
+<!--              action="Itax_calculation_master.action_it_returns_tax_section17"-->
+<!--              sequence="11"/>-->
+    <menuitem name="Max Overall Limits"
+              parent="menu_it_returns_configuration"
+              id="menu_it_returns_overall_limit"
+              action="Itax_calculation_master.action_it_returns_overall_limit"
+              sequence="12"/>
+</odoo>

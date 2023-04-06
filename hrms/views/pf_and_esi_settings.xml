@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="pf_esi_settings_tree" model="ir.ui.view">
+        <field name="name">pf.esi.settings.tree</field>
+        <field name="model">pf.esi.settings</field>
+        <field name="arch" type="xml">
+            <tree create="1">
+                <field name="pf_salary_limit"/>
+                <field name="employee_contribution"/>
+                <field name="employer_contribution"/>
+                <field name="employee_pension_scheme"/>
+                <field name="epf_admin_charges"/>
+                <field name="epf_min_amount_admin_charges"/>
+                <field name="edil_admin_charges"/>
+                <field name="edil_min_amount_admin_charges"/>
+                <field name="esi_salary_limit"/>
+                <field name="esi_employee_contribution"/>
+                <field name="esi_employer_contribution"/>
+                <field name="date_from_1st_half_year"/>
+                <field name="date_to_1st_half_year"/>
+                <field name="date_from_2nd_half_year"/>
+                <field name="date_to_2nd_half_year"/>
+            </tree>
+        </field>
+    </record>
+    <record id="pf_esi_settings_form" model="ir.ui.view">
+        <field name="name">pf.esi.settings.form</field>
+        <field name="model">pf.esi.settings</field>
+        <field name="arch" type="xml">
+            <form string="PF and ESI settings" create="0">
+                <sheet>
+                    <group string="PF Contribution" readonly="0">
+                        <field name="pf_esi_setting" invisible="1"/>
+                        <label for="pf_salary_limit"/>
+                        <div class="o_row">
+                            <field name="pf_salary_limit"/>
+                        </div>
+                        <label for="employee_contribution"/>
+                        <div class="o_row">
+                            <field name="employee_contribution"/>
+                        </div>
+                        <label for="employer_contribution"/>
+                        <div class="o_row">
+                            <field name="employer_contribution"/>
+                        </div>
+                        <label for="employee_pension_scheme"/>
+                        <div class="o_row">
+                            <field name="employee_pension_scheme"/>
+                        </div>
+                    </group>
+                    <group string="PF Admin Charges" readonly="1">
+                        <label for="epf_admin_charges"/>
+                        <div class="o_row">
+                            <field name="epf_admin_charges"/>
+                        </div>
+                        <label for="epf_min_amount_admin_charges"/>
+                        <div class="o_row">
+                            <field name="epf_min_amount_admin_charges"/>
+                        </div>
+                        <label for="edil_admin_charges"/>
+                        <div class="o_row">
+                            <field name="edil_admin_charges"/>
+                        </div>
+                        <label for="edil_min_amount_admin_charges"/>
+                        <div class="o_row">
+                            <field name="edil_min_amount_admin_charges"/>
+                        </div>
+                    </group>
+                    <group string="ESI Contribution" readonly="1">
+                        <label for="esi_salary_limit"/>
+                        <div class="o_row">
+                            <field name="esi_salary_limit"/>
+                        </div>
+                        <label for="esi_employee_contribution"/>
+                        <div class="o_row">
+                            <field name="esi_employee_contribution"/>
+                        </div>
+                        <label for="esi_employer_contribution"/>
+                        <div class="o_row">
+                            <field name="esi_employer_contribution"/>
+                        </div>
+                    </group>
+                    <group string="ESI Contribution Period (1st Half Year)" readonly="1">
+                        <!--                        <label for="date_from_1st_half_year"/>-->
+<!--                        <div>-->
+                            <!--                            <group>-->
+                            <!--                                <group>-->
+                            <!--                                </group>-->
+<!--                            <group>-->
+                                <group>
+                                    <field name="date_from_1st_half_year" class="oe_inline"/>
+                                </group>
+                                <group>
+                                    <field name="date_to_1st_half_year" class="oe_inline"/>
+                                </group>
+<!--                            </group>-->
+                            <!--                            </group>-->
+<!--                        </div>-->
+                        <!--                        <label for="date_to_1st_half_year"/>-->
+                        <!--                        <div class="o_row">-->
+                        <!--                            <group>-->
+                        <!--                                <field name="date_to_1st_half_year"/>-->
+                        <!--                            </group>-->
+                        <!--                        </div>-->
+                    </group>
+                    <group string="ESI Contribution Period (2nd Half Year)" readonly="1">
+                        <!--                                                <label for="date_from_2nd_half_year"/>-->
+<!--                        <div>-->
+<!--                            <group>-->
+                                <group>
+                                    <field name="date_from_2nd_half_year" class="o_row"/>
+                                </group>
+                                <group>
+                                    <field name="date_to_2nd_half_year" class="o_row"/>
+                                </group>
+<!--                            </group>-->
+<!--                        </div>-->
+                        <!--                                                <label for="date_to_2nd_half_year"/>-->
+                        <!--                        <div class="o_row">-->
+                        <!--                        </div>-->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_hr_payslip_form_inherit123" model="ir.ui.view">
+        <field name="name">hr.payslip.form.inherit</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="Itax_calculation_master.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page/group/field[@name='pf_amount']" position="after">
+                <field name="pf_contribution" widget="selection" invisible="1"/>
+                <field name="employee_pension_scheme" invisible="0"/>
+                <field name="pf_salary_limit" invisible="0"/>
+                <field name="employee_contribution" invisible="0"/>
+                <field name="employer_contribution" invisible="0"/>
+                <field name="pf_applicable_check_box" invisible="1"/>
+<!--                <field name="esi_salary_limit"/>-->
+<!--                <field name="esi_employee_contribution"/>-->
+<!--                <field name="esi_employer_contribution"/>-->
+            </xpath>
+
+        </field>
+    </record>
+    <record id="hr_employee_form_inherit_pf_esi" model="ir.ui.view">
+        <field name="name">hr.employee.form.inherit.pf.esi</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="Itax_calculation_master.hr_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group/field[@name='mbo']" position="after">
+                <field name="pf_applicable_check_box"/>
+                <field name="esi_applicable_check_box"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="pf_esi_settings_menu" model="ir.actions.act_window">
+        <field name="name">PF and ESI Settings</field>
+        <field name="res_model">pf.esi.settings</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="pf_esi_settings_tree"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Generate PF and ESI Details
+            </p>
+        </field>
+    </record>
+    <menuitem name="PF and ESI Settings"
+              parent="om_hr_payroll.menu_hr_payroll_configuration"
+              id="pf_esi_menu_payroll_configuration"
+              action="pf_esi_settings_menu"
+              sequence="12"/>
+</odoo>

@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_employee_language" model="ir.ui.view">
+        <field name="name">employee.language.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/group/field[@name='lang']"
+                   position="after">
+                <span class="o_form_label o_td_label" name="language_name">
+                    <b>Languages</b>
+                </span>
+                <div>
+                    <field name="lan_emp" widget="section_and_note_one2many" mode="tree">
+                        <tree>
+                            <field name="langauge_name" optional="show"/>
+                            <field name="speak_lang" optional="show"/>
+                            <field name="write_lang" optional="show"/>
+                            <field name="read_lang" optional="show"/>
+                        </tree>
+                        <form>
+                            <group>
+                                <field name="langauge_name"/>
+                                <field name="speak_lang"/>
+                                <field name="write_lang"/>
+                                <field name="read_lang"/>
+                            </group>
+                        </form>
+                    </field>
+                </div>
+                <field name="resume_emp"/>
+                <field name="total_exp"/>
+                <field name="date_join"/>
+<!--                <field name="net_amount"/>-->
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page[@name='hr_settings']/group/group[@name='active_group']/field[@name='user_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page[@name='hr_settings']/group/group[@name='active_group']/field[@name='user_id']" position="after">
+                <field name="emp_category"/>
+                <field name="date_conformation" attrs="{'invisible': [('emp_category', '!=', 'confirmed')]}"/>
+                <field name="conformation_ref" attrs="{'invisible': [('emp_category', '!=', 'confirmed')]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

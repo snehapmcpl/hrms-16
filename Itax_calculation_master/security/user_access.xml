@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.module.category" id="module_category_IT_users">
+        <field name="name">Income Tax</field>
+        <field name="sequence">0</field>
+    </record>
+    <record id="group_admin" model="res.groups">
+        <field name="name">Admin</field>
+        <field name="category_id" ref="module_category_IT_users"/>
+    </record>
+</odoo>

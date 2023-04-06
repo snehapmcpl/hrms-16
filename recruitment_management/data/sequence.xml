@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="seq_applicant" model="ir.sequence">
+            <field name="name">Recruitment</field>
+            <field name="code">hr.applicant</field>
+            <field name="prefix">OL/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

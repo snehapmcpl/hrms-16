@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="employee_self_tax_record_tree" model="ir.ui.view">
+        <field name="name">hr.employee.tax.tree</field>
+        <field name="model">hr.employee.tax</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="employee_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="employee_self_tax_record_form" model="ir.ui.view">
+        <field name="name">hr.employee.tax.form</field>
+        <field name="model">hr.employee.tax</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <h2>
+                        <field name="name"/>
+                    </h2>
+                    <group>
+                        <field name="employee_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Section 24" name="section_24">
+                            <field name="section_24">
+                                <tree editable="bottom">
+                                    <field name="section_24"/>
+                                    <field name="amount"/>
+                                    <field name="document" filename="file_name" required="0" widget="binary"/>
+                                    <field name="file_name" invisible="1"/>
+                                    <field name="self_service_section24" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Section 80C" name="section_80c">
+                            <field name="section_80c">
+                                <tree editable="bottom">
+                                    <field name="section_80c"/>
+                                    <field name="amount"/>
+                                    <field name="document" filename="file_name" required="0" widget="binary"/>
+                                    <field name="file_name" invisible="1"/>
+                                    <field name="self_service_section80c" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Chapter VI A" name="chapter_vi_a">
+                            <field name="chapter_VI_A">
+                                <tree editable="bottom">
+                                    <field name="chapter6"/>
+                                    <field name="amount"/>
+                                    <field name="document" filename="file_name" required="0" widget="binary"/>
+                                    <field name="file_name" invisible="1"/>
+                                    <field name="self_service_chapter6" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Section 10" name="self_service_section_10">
+                            <field name="section_10">
+                                <tree editable="bottom">
+                                    <field name="section_10" domain="[('is_required', '=', False)]"/>
+                                    <field name="amount"/>
+                                    <field name="document" filename="file_name" widget="binary"/>
+                                    <field name="file_name" invisible="1"/>
+                                    <field name="self_service_section10" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Income From other sources" name="other_income_sources">
+                            <field name="other_income">
+                                <tree editable="bottom">
+                                    <field name="other_incomes"/>
+                                    <field name="amount"/>
+                                    <field name="self_service_other_income" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

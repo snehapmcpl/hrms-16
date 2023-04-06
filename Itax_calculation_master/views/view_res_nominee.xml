@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_employee_nominee_page" model="ir.ui.view">
+        <field name="name">employee.nomine.page.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[@name='family_details']/group[@name='references_details']" position="after">
+                <group name="nominee_details" string="Nominee Details For Insurance">
+                    <field name="nominee_details" string="Nominee Details" widget="section_and_note_one2many"
+                           mode="tree">
+                        <tree>
+                            <field name="nominee_name" optional="show"/>
+                            <field name="relationship_with_nominee" optional="show"/>
+                            <field name="nominee_gender" optional="show"/>
+                            <field name="nominee_dob" optional="show"/>
+                            <field name="Proportion_to_be_shared" optional="hide"/>
+                        </tree>
+                        <form>
+                            <group>
+                                <field name="nominee_name"/>
+                                <field name="relationship_with_nominee"/>
+                                <field name="nominee_gender"/>
+                                <field name="nominee_dob"/>
+                                <span class="o_form_label o_td_label" name="address_name">
+                                    <b>Address</b>
+                                </span>
+                                <div class="o_address_format">
+                                    <field name="street_nominee" placeholder="Street..." class="o_address_street"/>
+                                    <field name="street2_nominee" placeholder="Street 2..."
+                                           class="o_address_street"/>
+                                    <field name="city_nominee" placeholder="City" class="o_address_city"/>
+                                    <field name="state_id_nominee" class="o_address_state" placeholder="State"
+                                           options="{'no_open': True, 'no_quick_create': True}"/>
+                                    <field name="pincode_nominee" placeholder="PIN CODE" class="o_address_zip"/>
+                                    <field name="country_id_nominee" placeholder="Country" class="o_address_country"
+                                           options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                                </div>
+                                <field name="Proportion_to_be_shared"/>
+                            </group>
+                        </form>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

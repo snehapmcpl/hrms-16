@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_applicant_view_form_inherit" model="ir.ui.view">
+        <field name="name">hr.applicant.form</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button string="Generate Offerletter" name="generate_offer_letter" type="object" class="oe_highlight" attrs="{'invisible': [('active', '=', False)]}"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_name']" position="before">
+                <field name="title"/>
+            </xpath>
+            <xpath expr="//field[@name='email_from']" position="before">
+                <field name="reference"/>
+            </xpath>
+            <xpath expr="//field[@name='email_cc']" position="after">
+                <field name="location"/>
+            </xpath>
+            <xpath expr="//field[@name='availability']" position="after">
+                <field name="offer_letter_validity"/>
+                <field name="probationary_period" placeholder="In Months"/>
+                <field name="salary_breakup_id"/>
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="no_of_rounds" placeholder="Maximum 6.."/>
+<!--                <field name="evaluation"/>-->
+                <!-- <field name="approval_id" required="1"/> -->
+            </xpath>
+            <xpath expr="//field[@name='type_id']" position="after">
+                <field name="interview_stage"/>
+            </xpath>
+            <xpath expr="//notebook/page" position="replace">
+                <page string="Interview Feedback Form" attrs="{'invisible':[('no_of_rounds','&lt;',1)]}">
+                    <form>
+                        <sheet>
+                            <group>
+                                <group>
+                                    <field name="recruiter" attrs="{'required':[('no_of_rounds','>=',1)],'readonly':[('interview_stage','!=','First Interview')]}"/>
+                                    <field name="date" attrs="{'required':[('no_of_rounds','>=',1)], 'readonly':[('interview_stage','!=','First Interview')]}"/>
+                                    <field name="duration" attrs="{'required':[('no_of_rounds','>=',1)], 'readonly':[('interview_stage','!=','First Interview')]}"/>
+                                </group>
+                                <group>
+                                    <field name="evaluation" string="Evaluation Template"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="hire" placeholder="Why should the candidate be hired?" attrs="{'readonly':[('interview_stage','!=','First Interview')]}"/>
+                                <field name="hold" placeholder="Specify the reason for the candidate application to be kept on hold." attrs="{'readonly':[('interview_stage','!=','First Interview')]}"/>
+                                <field name="proceed_no_further" placeholder="Specify the reason for rejecting the candidate application." attrs="{'readonly':[('interview_stage','!=','First Interview')]}"/>
+                                <field name="other" placeholder="Any other additional feedbacks (if any)" attrs="{'readonly':[('interview_stage','!=','First Interview')]}"/>
+                            </group>
+                            <field name="review_1" widget="one2many_list">
+                                <tree editable="bottom">
+                                    <field name="questions_que" required="1"/>
+                                    <field name="review"/>
+                                    <field name="applicant_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </sheet>
+                    </form>
+                </page>
+                <page string="Interview Feedback Form 2" attrs="{'invisible':[('no_of_rounds','&lt;',2)]}">
+                    <form>
+                        <sheet>
+                            <group>
+                                <group>
+                                    <field name="recruiter2" attrs="{'required':[('no_of_rounds','>=',2)], 'readonly':[('interview_stage','!=','Second Interview')]}"/>
+                                    <field name="date2" attrs="{'required':[('no_of_rounds','>=',2)], 'readonly':[('interview_stage','!=','Second Interview')]}"/>
+                                    <field name="duration2" attrs="{'required':[('no_of_rounds','>=',2)], 'readonly':[('interview_stage','!=','Second Interview')]}"/>
+                                </group>
+                                <group>
+                                    <field name="evaluation2" string="Evaluation Template"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="hire2" placeholder="Why should the candidate be hired?" attrs="{'readonly':[('interview_stage','!=','Second Interview')]}"/>
+                                <field name="hold2" placeholder="Specify the reason for the candidate application to be kept on hold." attrs="{'readonly':[('interview_stage','!=','Second Interview')]}"/>
+                                <field name="proceed_no_further2" placeholder="Specify the reason for rejecting the candidate application." attrs="{'readonly':[('interview_stage','!=','Second Interview')]}"/>
+                                <field name="other2" placeholder="Any other additional feedbacks (if any)" attrs="{'readonly':[('interview_stage','!=','Second Interview')]}"/>
+                            </group>
+                            <field name="review_2" widget="one2many_list">
+                                <tree editable="bottom">
+                                    <field name="questions_que" required="1"/>
+                                    <field name="review"/>
+                                    <field name="applicant_id2" invisible="1"/>
+                                </tree>
+                            </field>
+                        </sheet>
+                    </form>
+                </page>
+                <page string="Interview Feedback Form 3" attrs="{'invisible':[('no_of_rounds','&lt;',3)]}">
+                    <form>
+                        <sheet>
+                            <group>
+                                <group>
+                                    <field name="recruiter3" attrs="{'required':[('no_of_rounds','>=',3)]}"/>
+                                    <field name="date3" attrs="{'required':[('no_of_rounds','>=',3)]}"/>
+                                    <field name="duration3" attrs="{'required':[('no_of_rounds','>=',3)]}"/>
+                                </group>
+                                <group>
+                                    <field name="evaluation3" string="Evaluation Template"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="hire3" placeholder="Why should the candidate be hired?"/>
+                                <field name="hold3" placeholder="Specify the reason for the candidate application to be kept on hold."/>
+                                <field name="proceed_no_further3" placeholder="Specify the reason for rejecting the candidate application."/>
+                                <field name="other3" placeholder="Any other additional feedbacks (if any)"/>
+                            </group>
+                            <field name="review_3" widget="one2many_list">
+                                <tree editable="bottom">
+                                    <field name="questions_que" required="1"/>
+                                    <field name="review"/>
+                                    <field name="applicant_id3" invisible="1"/>
+                                </tree>
+                            </field>
+                        </sheet>
+                    </form>
+                </page>
+                <page string="Interview Feedback Form 4" attrs="{'invisible':[('no_of_rounds','&lt;',4)]}">
+                    <form>
+                        <sheet>
+                            <group>
+                                <group>
+                                    <field name="recruiter4" attrs="{'required':[('no_of_rounds','>=',4)]}"/>
+                                    <field name="date4" attrs="{'required':[('no_of_rounds','>=',4)]}"/>
+                                    <field name="duration4" attrs="{'required':[('no_of_rounds','>=',4)]}"/>
+                                </group>
+                                <group>
+                                    <field name="evaluation4" string="Evaluation Template"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="hire4" placeholder="Why should the candidate be hired?"/>
+                                <field name="hold4" placeholder="Specify the reason for the candidate application to be kept on hold."/>
+                                <field name="proceed_no_further4" placeholder="Specify the reason for rejecting the candidate application."/>
+                                <field name="other4" placeholder="Any other additional feedbacks (if any)"/>
+                            </group>
+                            <field name="review_4" widget="one2many_list">
+                                <tree editable="bottom">
+                                    <field name="questions_que" required="1"/>
+                                    <field name="review"/>
+                                    <field name="applicant_id4" invisible="1"/>
+                                </tree>
+                            </field>
+                        </sheet>
+                    </form>
+                </page>
+                <page string="Interview Feedback Form 5" attrs="{'invisible':[('no_of_rounds','&lt;',5)]}">
+                    <form>
+                        <sheet>
+                            <group>
+                                <group>
+                                    <field name="recruiter5" attrs="{'required':[('no_of_rounds','>=',5)]}"/>
+                                    <field name="date5" attrs="{'required':[('no_of_rounds','>=',5)]}"/>
+                                    <field name="duration5" attrs="{'required':[('no_of_rounds','>=',5)]}"/>
+                                </group>
+                                <group>
+                                    <field name="evaluation5" string="Evaluation Template"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="hire5" placeholder="Why should the candidate be hired?"/>
+                                <field name="hold5" placeholder="Specify the reason for the candidate application to be kept on hold."/>
+                                <field name="proceed_no_further5" placeholder="Specify the reason for rejecting the candidate application."/>
+                                <field name="other5" placeholder="Any other additional feedbacks (if any)"/>
+                            </group>
+                            <field name="review_5" widget="one2many_list">
+                                <tree editable="bottom">
+                                    <field name="questions_que" required="1"/>
+                                    <field name="review"/>
+                                    <field name="applicant_id5" invisible="1"/>
+                                </tree>
+                            </field>
+                        </sheet>
+                    </form>
+                </page>
+                <page string="Interview Feedback Form 6" attrs="{'invisible':[('no_of_rounds','&lt;',6)]}">
+                    <form>
+                        <sheet>
+                            <group>
+                                <group>
+                                    <field name="recruiter6" attrs="{'required':[('no_of_rounds','>=',6)]}"/>
+                                    <field name="date6" attrs="{'required':[('no_of_rounds','>=',6)]}"/>
+                                    <field name="duration6" attrs="{'required':[('no_of_rounds','>=',6)]}"/>
+                                </group>
+                                <group>
+                                    <field name="evaluation6" string="Evaluation Template"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="hire6" placeholder="Why should the candidate be hired?"/>
+                                <field name="hold6" placeholder="Specify the reason for the candidate application to be kept on hold."/>
+                                <field name="proceed_no_further6" placeholder="Specify the reason for rejecting the candidate application."/>
+                                <field name="other6" placeholder="Any other additional feedbacks (if any)"/>
+                            </group>
+                            <field name="review_6" widget="one2many_list">
+                                <tree editable="bottom">
+                                    <field name="questions_que" required="1"/>
+                                    <field name="review"/>
+                                    <field name="applicant_id6" invisible="1"/>
+                                </tree>
+                            </field>
+                        </sheet>
+                    </form>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

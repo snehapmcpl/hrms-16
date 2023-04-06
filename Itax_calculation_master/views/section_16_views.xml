@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="it_returns_tax_section16_tree" model="ir.ui.view">
+        <field name="name">tax.section16.tree</field>
+        <field name="model">tax.section16</field>
+        <field name="arch" type="xml">
+            <tree string="Section 16">
+                <field name="name"/>
+                <field name="limit_amount"/>
+                <field name="is_required"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="it_returns_tax_section16_form" model="ir.ui.view">
+        <field name="name">tax.section16.form</field>
+        <field name="model">tax.section16</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" required="1"/>
+                        <field name="limit_amount"/>
+                        <field name="is_required"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_it_returns_tax_section16">
+        <field name="name">Section 16</field>
+        <field name="res_model">tax.section16</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_recruitment_review,recruitment_review,model_recruitment_review,,1,1,1,1
+access_recruitment_review_line,recruitment_review_line,model_recruitment_review_line,,1,1,1,1
+access_review_line,review_line,model_review_line,,1,1,1,1
+access_review_line2,review_line2,model_review_line2,,1,1,1,1
+access_review_line3,review_line3,model_review_line3,,1,1,1,1
+access_review_line4,review_line4,model_review_line4,,1,1,1,1
+access_review_line5,review_line5,model_review_line5,,1,1,1,1
+access_review_line6,review_line6,model_review_line6,,1,1,1,1
+access_employee_salary_breakup,employee_salary_breakup,model_employee_salary_breakup,,1,1,1,1

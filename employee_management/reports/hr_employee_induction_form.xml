@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="paperformat_employee" model="report.paperformat">
+        <field name="name">employee report</field>
+        <field name="default" eval="False"/>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">15</field>
+        <field name="margin_bottom">15</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">0</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="employee_induction_form" model="ir.actions.report">
+        <field name="name">Employee Induction Form</field>
+        <field name="model">hr.employee</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">employee_management.report_employee_induction_form</field>
+        <field name="report_file">employee_management.report_employee_induction_form</field>
+        <field name="paperformat_id" ref="employee_management.paperformat_employee"/>
+        <field name="binding_model_id" ref="model_hr_employee"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_employee_induction_form">
+        <t t-call="web.basic_layout">
+            <t t-call="employee_management.report_employee"/>
+            <t t-call="employee_management.background_report_employee"/>
+            <t t-call="employee_management.history_report_employee"/>
+        </t>
+    </template>
+</odoo>

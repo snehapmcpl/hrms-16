@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="conformation_letter_template">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <t t-foreach="docs" t-as="doc">
+                        <style>
+                            table {
+                                padding-left: 5px;
+                                font-size: 18px;
+                                font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+                            }
+                        </style>
+                        <table>
+                            <tr>
+                                <td style="text-align: right; line-height: normal; padding-right: 0%;"
+                                    colspan="2">
+                                    <span>
+                                        <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)"
+                                             width="25%;" alt="Logo"/>
+                                    </span>
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 25%;text-align: right;" colspan="2">
+                                    <b style="font-size: 13px;padding-bottom:5px;">CIN:
+                                        <span t-esc="doc.company_id.cin_emp"/>
+                                    </b>
+                                    <br/>
+                                    <b style="font-size: 13px;padding-bottom:5px;">UAN No:
+                                        <span t-esc="doc.company_id.uan_emp"/>
+                                    </b>
+                                    <br/>
+                                    <b style="font-size: 13px;">Startup:
+                                        <span t-esc="doc.company_id.startup_emp"/>
+                                    </b>
+                                </td>
+                            </tr>
+                            <tr style="width: 100%;">
+                                <td colspan="2">
+                                    <center>
+                                        <u><h1><b>LETTER OF CONFIRMATION</b></h1></u>
+                                    </center>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left; font-size: 20px">
+                                    <b><u>Ref:</u>
+                                        <t t-esc="doc.conformation_ref"/>
+                                    </b>
+                                    <br/>
+                                    Date:
+                                    <t t-if="doc.date_conformation">
+                                        <span style="font-size: 18px"  t-esc="doc.date_conformation.strftime('%B-%d-%Y')"/>
+                                    </t>
+                                </td>
+                                <td style="text-align: right;">
+                                    <b>
+                                        <span style="font-size: 18px;padding-bottom:2px;" t-esc="doc.company_id.name"/>
+                                    </b>
+                                    <br/>
+<!--                                    <span>-->
+                                        <t  style="font-size: 13px;padding-bottom:2px;" t-esc="doc.company_id.street"/>,<t t-esc="doc.company_id.street2"/>,
+                                        <t t-esc="doc.company_id.city"/>
+                                        -
+                                        <t t-esc="doc.company_id.zip"/>
+                                        <br/>
+                                        <t style="font-size: 13px;padding-bottom:2px;" t-esc="doc.company_id.state_id.name"/>,
+                                        <t t-esc="doc.company_id.country_id.name"/>
+                                        <br/>
+                                        Phone:
+                                        <t style="font-size: 13px;padding-bottom:2px;" t-esc="doc.company_id.phone"/>
+                                        <br/>
+                                        Email:
+                                        <t style="font-size: 13px;padding-bottom:2px;" t-esc="doc.company_id.email"/>
+                                        <br/>
+                                        URL:
+                                        <t style="font-size: 13px;padding-bottom:2px;" t-esc="doc.company_id.website"/>
+<!--                                    </span>-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colsapn="2"  style="text-align: left; font-size: 20px">
+                                    To,<br/>
+                                    <span><t t-esc="doc.get_title()"/> </span><t t-esc="doc.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colsapn="2"  style="text-align: left;padding-top: 30px;font-weight: bold;">
+                                    <u>EMPLOYEE CODE:</u>
+                                    <span t-esc="doc.identification_id"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colsapn="2"  style="text-align: left;padding-top: 30px;">
+                                    <u><b>Designation :</b></u>
+                                    <span style="font-size: 18px" t-esc="doc.job_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colsapn="2"  style="text-align: left;padding-top: 30px;">
+                                    <b>Sub :</b> CONFIRMATION LETTER
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colsapn="2"  style="text-align: left;padding-top: 30px;">
+                                    Dear
+                                    <span t-esc="doc.get_partner_first_name()"/>,
+                                </td>
+                            </tr>
+                        </table>
+                        <table>
+                            <tr>
+                                <td colsapn="3" style="width: 1000px;  text-align: left; font-size: 20px;padding-top: 30px;">
+                                    <p>
+<!--                                        This letter has the reference to the Letter of Appointment-->
+<!--&lt;!&ndash;                                        <t t-esc="doc.name"/> &ndash;&gt;-->
+<!--                                        dated-->
+<!--&lt;!&ndash;                                        <t t-esc="doc.name"/>.&ndash;&gt;-->
+                                        This has reference to our letter of appointment No:
+                                        <t t-esc="doc.conformation_ref"/>/<t t-esc="doc.appointment_reference"/>
+                                        dated
+                                        <t t-if="doc.appointment_date">
+                                            <t t-esc="doc.appointment_date.strftime('%d-%m-%Y')"/>
+                                        </t>,
+                                        a review of your performance during your probationary period was done and
+                                        in this connection, we are pleased to inform you that you stand confirmed in the
+                                        services of the establishment w.e.f
+                                        <t t-if="doc.date_conformation">
+                                            <t t-esc="doc.date_conformation.strftime('%d-%B-%Y')"/>
+                                        </t>
+                                        , in the same designation.
+                                    </p>
+                                    <p>
+                                        All other terms &amp; conditions of your employment as mentioned in the letter
+                                        of appointment and HR handbook published shall continue and remain unchanged.
+                                    </p>
+                                    <p>
+                                        We sincerely hope that you shall continue to work with dedication, loyalty,
+                                        zeal and enthusiasm so as to help the organization to achieve greater heights
+                                        in the days to come.
+                                    </p>
+                                    <p>
+                                        We look forward to your long and fruitful association with us.
+                                    </p>
+                                    <p>
+                                        <b>For <span t-esc='doc.company_id.partner_id.name'/>,</b>
+                                        <br/><br/><br/><br/>
+                                        <b>
+                                            <t t-esc="doc.company_id.director_id.name"/><br/>
+                                            Director</b>
+                                    </p>
+                                    <p>
+                                        Received and Accepted the above Terms &amp; Conditions
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

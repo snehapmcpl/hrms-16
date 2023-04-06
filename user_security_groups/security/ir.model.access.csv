@@ -1,0 +1,29 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_employee_emp,access.hr.employee.emp,hr.model_hr_employee,group_user_employee,1,0,0,0
+access_hr_payslip_emp,access.hr.payslip.emp,om_hr_payroll.model_hr_payslip,group_user_employee,1,0,0,0
+Itax_calculation_master.access_employee_tds,employee_tds,Itax_calculation_master.model_employee_tds,hr.group_hr_user,1,0,0,0
+employee_self_service.access_hr_employee_tax,hr_employee_tax,employee_self_service.model_hr_employee_tax,group_user_employee,1,1,1,0
+access_hr_employee_tax_manager,hr_employee_tax_manager,employee_self_service.model_hr_employee_tax,group_user_managers,1,1,1,0
+access_hr_payslip_manager,access.hr.payslip.manager,om_hr_payroll.model_hr_payslip,group_user_managers,1,0,0,0
+access_hr_payslip_ceo,access.hr.payslip.ceo,om_hr_payroll.model_hr_payslip,group_user_director,1,0,0,0
+access_hr_employee_tax_ceo,hr_employee_tax_ceo,employee_self_service.model_hr_employee_tax,group_user_director,1,1,1,0
+access_hr_employee_emp,hr.employee emo,hr.model_hr_employee,user_access.group_self_service_employee,1,1,0,0
+access_hr_leave_type_emp,hr.leave.type emo,hr_holidays.model_hr_leave_type,user_access.group_self_service_employee,1,0,0,0
+access_hr_employee_tax_hr_admin,hr_employee_tax_hr_admin,employee_self_service.model_hr_employee_tax,group_user_hr_admin,1,1,1,1
+oh_appraisal.access_hr_appraisal_hr_appraisal,oh_appraisal.hr_appraisal,oh_appraisal.model_hr_appraisal,group_user_hr_admin,1,1,1,1
+access_hr_appraisal_hr_appraisal_ceo,oh_appraisal.hr_appraisal_ceo,oh_appraisal.model_hr_appraisal,group_user_director,1,0,0,0
+access_hr_appraisal_hr_appraisal_manager,oh_appraisal.hr_appraisal_manager,oh_appraisal.model_hr_appraisal,group_user_managers,1,0,0,0
+access_hr_appraisal_hr_appraisal_emp,oh_appraisal.hr_appraisal_emp,oh_appraisal.model_hr_appraisal,group_user_employee,1,0,0,0
+access_hr_payslip_ss,access.hr.payslip.ss,om_hr_payroll.model_hr_payslip,user_access.group_self_service_employee,1,0,0,0
+access_employee_tds_admin,access.employee.tds.admin,Itax_calculation_master.model_employee_tds,hr.group_hr_manager,1,1,1,1
+
+
+
+
+
+
+
+
+
+
+

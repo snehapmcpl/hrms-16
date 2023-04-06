@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="background_report_employee">
+<!--        <t t-call="web.basic_layout">-->
+            <div style="page-break-after:always"/>
+            <style>
+                td, table {
+                font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+                }
+            </style>
+            <div class="page">
+                <t t-foreach="docs" t-as="doc">
+                    <table>
+                        <tr>
+                            <td style="width: 40%; text-align: left; line-height: normal; padding-left: 5px;">
+                                <b style="font-size: 20px" >Background Verification Form</b>
+                            </td>
+                            <td style="text-align: right; line-height: normal; padding-right: 0%;width: 25%;">
+<!--                                <span>-->
+<!--                                    <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)"-->
+<!--                                         alt="Logo" width="70%;"/>-->
+<!--                                </span>-->
+<!--                                <br/>-->
+                            </td>
+                        </tr>
+                        <br/>
+                        <tr height="14px"></tr>
+                    </table>
+                    <table>
+                        <tr style="border: 1px solid black;">
+                            <td style="width:333px; font-size: 12px;padding: 5px; border: 1px solid black;">
+                                <b style="font-size: 14px">Employee ID/ Applicant ID:
+
+                                </b>
+                                <span tyle="font-size: 12px" t-esc="doc.identification_id"/>
+                            </td>
+                            <td style="width:333px; font-size: 12px;padding: 5px; border: 1px solid black;"
+                                colspan="2">
+                                <b style="font-size: 14px">Location:
+
+                                </b>
+                                <span style="font-size: 12px" t-esc="doc.work_location_id.name"/>
+                            </td>
+                            <td style="width:333px; font-size: 12px;padding: 5px; border: 1px solid black;"
+                                colspan="2">
+                                <b style="font-size: 14px">DOJ:
+
+                                </b>
+                                <t t-if="doc.date_join">
+                                    <span style="font-size: 12px" t-esc="doc.date_join.strftime('%d-%m-%Y')"/>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 1000px; text-align: left; line-height: normal; padding-left: 5px;border: 0.25px solid black; border: 1px solid black;"
+                                colspan="4">
+                                <b style="font-size: 14px">NAME:</b>
+                                <span style="font-size: 12px" t-esc="doc.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 1000px; text-align: left; line-height: normal; padding-left: 5px;border: 0.25px solid black; border: 1px solid black;"
+                                colspan="4">
+                                <b style="font-size: 14px">Father's Name:
+
+                                </b>
+                                <span style="font-size: 12px" t-esc="doc.father_name_emp"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 1000px; text-align: left; line-height: normal; padding-left: 5px;border: 0.25px solid black; border: 1px solid black;"
+                                colspan="4">
+                                <b style="font-size: 14px">Date of Birth:</b>
+                                <t t-if="doc.birthday">
+                                    <span style="font-size: 12px" t-esc="doc.birthday.strftime('%d-%m-%Y')"/>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 1000px; text-align: left; line-height: normal; padding-left: 5px;border: 0.25px solid black; border: 1px solid black;" colspan="2">
+                                <b style="font-size: 14px">Mobile No:
+
+                                </b>
+                                 <span style="font-size: 12px" t-esc="doc.phone"/>
+                            </td>
+                            <td style="width: 1000px; text-align: left; line-height: normal; padding-left: 5px;border: 0.25px solid black; border: 1px solid black;" colspan="2">
+                                <b style="font-size: 14px">Landline No:
+
+                                </b>
+<!--                                <span style="font-size: 12px" t-esc="doc.birthday"/>-->
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td style="width:1000px; padding: 5px; border: 1px solid black;"
+                                colspan="7">
+                                <b style="font-size: 14px">Education(Highest Degree first)</b>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #dedede">
+                            <td style="width: 250px; font-size: 14px;
+                            padding: 5px; border: 1px solid black;">
+                                <b>College Name</b>
+                            </td>
+                            <td style="width: 250px; font-size: 14px;
+                            padding: 5px;border: 1px solid black;">
+                                <b>Address</b>
+                            </td>
+                            <td style="width: 250px; font-size: 14px;
+                            padding: 5px; border: 1px solid black;">
+                                <b>Specialization</b>
+                            </td>
+                            <td style="width: 250px;  font-size: 14px;
+                            padding: 5px; border: 1px solid black;">
+                                <b>Degree Name</b>
+                            </td>
+                        </tr>
+                        <t t-foreach="doc.background_emp" t-as="line">
+                            <tr>
+                                <td style="width: 250px; font-size: 12px;
+                            padding: 5px; border: 1px solid black;">
+                                    <t t-esc="line.college_name_emp"/>
+                                </td>
+                                <td style="width: 250px; font-size: 12px;
+                            padding: 5px; border: 1px solid black;">
+                                    <t t-if="line.street_background">
+                                        <t t-esc="line.street_background"/>
+                                        <br/>
+                                    </t>
+                                    <t t-if="line.street2_background">
+                                        <t t-esc="line.street2_background"/>
+                                        <br/>
+                                    </t>
+                                    <t t-if="line.city_background">
+                                        <t t-esc="line.city_background"/>
+                                        <br/>
+                                    </t>
+                                    <t t-if="line.state_id_background.name">
+                                        <t t-esc="line.state_id_background.name"/>,
+                                    </t>
+                                    <t t-if="line.country_id_background.name">
+                                        <t t-esc="line.country_id_background.name"/>-
+                                        <t t-esc="line.pincode_background"/>
+                                        <br/>
+                                    </t>
+                                </td>
+                                <td style="width: 250px; font-size: 12px;
+                            padding: 5px; border: 1px solid black;">
+                                    <t t-esc="line.specialization_emp"/>
+                                </td>
+                                <td style="width: 250px; font-size: 12px;
+                            padding: 5px; border: 1px solid black;">
+                                    <t t-esc="line.certificate_level"/>
+                                </td>
+
+                            </tr>
+                        </t>
+                        <tr style="background-color: #dedede">
+                            <td style="width: 250px; font-size: 14px;
+                            padding: 5px; border: 1px solid black;">
+                                <b>Board/University</b>
+                            </td>
+                            <td style="width: 250px; font-size: 14px;
+                            padding: 5px;border: 1px solid black;">
+                                <b>From Month And Year</b>
+                            </td>
+                            <td style="width: 250px; font-size: 14px;
+                            padding: 5px; border: 1px solid black;">
+                                <b>To Month And Year</b>
+                            </td>
+                            <td style="width: 250px; font-size: 14px;
+                            padding: 5px; border: 1px solid black;">
+                                <b>Roll No/ID</b>
+                            </td>
+                        </tr>
+                        <t t-foreach="doc.background_emp" t-as="line">
+                            <tr>
+                                <td style="width: 250px; font-size: 12px;
+                            padding: 5px; border: 1px solid black;">
+                                    <t t-esc="line.board"/>
+                                </td>
+                                <td style="width: 250px; font-size: 12px;
+                            padding: 5px; border: 1px solid black;">
+                                    <t t-if="line.from_month_date">
+                                        <t t-esc="line.from_month_date.strftime('%d-%m-%Y')"/>
+                                    </t>
+                                </td>
+                                <td style="width: 250px; font-size: 12px;
+                            padding: 5px; border: 1px solid black;">
+                                    <t t-if="line.end_month_date">
+                                        <t t-esc="line.end_month_date.strftime('%d-%m-%Y')"/>
+                                    </t>
+                                </td>
+                                <td style="width: 250px; font-size: 12px;
+                            padding: 5px; border: 1px solid black;">
+                                    <t t-esc="line.roll_no"/>
+                                </td>
+
+                            </tr>
+                        </t>
+                        <tr>
+                            <td style="width:1000px; font-size: 12px;padding: 5px; border: 1px solid black;"
+                                colspan="7">
+                                <b style="font-size: 14px">Other Skills:</b>
+<!--                                <span t-esc="line.other_skill"/>-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="height: 60px;text-align: left; line-height: normal; padding-left: 5px; border: 1px solid black;"
+                                colspan="7">
+                                <b style="font-size: 14px">Signature of the Applicant :__________________________________________
+                                </b>
+                            </td>
+                        </tr>
+                    </table>
+                </t>
+            </div>
+<!--        </t>-->
+    </template>
+</odoo>

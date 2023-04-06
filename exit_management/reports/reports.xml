@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+		<record id="paperformat_slip" model="report.paperformat">
+			<field name="name">employee slip</field>
+			<field name="default" eval="False"/>
+			<field name="page_height">0</field>
+			<field name="page_width">0</field>
+			<field name="orientation">Portrait</field>
+			<field name="margin_top">5</field>
+			<field name="margin_bottom">5</field>
+			<field name="margin_left">7</field>
+			<field name="margin_right">7</field>
+			<field name="header_line" eval="False"/>
+			<field name="header_spacing">0</field>
+			<field name="dpi">90</field>
+		</record>
+
+<!--        <report-->
+<!--            id="exzatech_exit_management_view"-->
+<!--            model="hr.resignation"-->
+<!--            string="Settlement Slip"-->
+<!--            report_type="qweb-pdf"-->
+<!--            name="exzatech_exit_management.settlementslip_print_view"-->
+<!--            file="exzatech_exit_management.settlementslip_print_view"-->
+<!--			print_report_name="'Settlement Slip - %s' % (object.employee_id.name)"-->
+<!--            />-->
+
+		<record id="exit_management_view" model="ir.actions.report">
+			<field name="name">Settlement Slip</field>
+			<field name="model">hr.resignation</field>
+			<field name="report_type">qweb-pdf</field>
+			<field name="report_name">exit_management.settlementslip_print_view</field>
+			<field name="report_file">exit_management.settlementslip_print_view</field>
+			<field name="print_report_name">'Settlement Slip - %s' % (object.employee_id.name)</field>
+			<field name="paperformat_id" ref="exit_management.paperformat_slip"/>
+			<field name="binding_model_id" ref="model_hr_resignation"/>
+			<field name="binding_type">report</field>
+		</record>
+
+
+<!--		<record id="exzatech_exit_management.exzatech_exit_management_view" model="ir.actions.report">-->
+<!--    		<field name="paperformat_id" ref="exzatech_exit_management.paperformat_slip" />-->
+<!--		</record>-->
+
+<!--    <report-->
+<!--			id="relieving_letter_report"-->
+<!--			model="hr.resignation"-->
+<!--			string="Relieving Letter"-->
+<!--			report_type="qweb-pdf"-->
+<!--			name="exzatech_exit_management.report_relieving_letter"-->
+<!--			file="exzatech_exit_management.report_relieving_letter"-->
+<!--            print_report_name="'Relieving Letter - %s' % (object.employee_id.name)"-->
+<!--		/>-->
+		<record id="relieving_letter_report" model="ir.actions.report">
+			<field name="name">Relieving Letter</field>
+			<field name="model">hr.resignation</field>
+			<field name="report_type">qweb-pdf</field>
+			<field name="report_name">exit_management.report_relieving_letter</field>
+			<field name="report_file">exit_management.report_relieving_letter</field>
+			<field name="print_report_name">'Relieving Letter - %s' % (object.employee_id.name)</field>
+			<field name="paperformat_id" ref="exit_management.paperformat_slip"/>
+			<field name="binding_model_id" ref="model_hr_resignation"/>
+			<field name="binding_type">report</field>
+		</record>
+
+
+
+<!--	<report-->
+<!--			id="experience_letter_report"-->
+<!--			model="hr.resignation"-->
+<!--			string="Experience Letter"-->
+<!--			report_type="qweb-pdf"-->
+<!--			name="exzatech_exit_management.report_experience_letter"-->
+<!--			file="exzatech_exit_management.report_experience_letter"-->
+<!--            print_report_name="'Experience Letter - %s' % (object.employee_id.name)"-->
+<!--		/>-->
+
+
+		<record id="experience_letter_report" model="ir.actions.report">
+			<field name="name">Experience Letter</field>
+			<field name="model">hr.resignation</field>
+			<field name="report_type">qweb-pdf</field>
+			<field name="report_name">exit_management.report_experience_letter</field>
+			<field name="report_file">exit_management.report_experience_letter</field>
+			<field name="print_report_name">'Experience Letter - %s' % (object.employee_id.name)</field>
+			<field name="paperformat_id" ref="exit_management.paperformat_slip"/>
+			<field name="binding_model_id" ref="model_hr_resignation"/>
+			<field name="binding_type">report</field>
+		</record>
+
+<!--	<report-->
+<!--			id="handover_form_report"-->
+<!--			model="hr.resignation"-->
+<!--			string="Handover Form"-->
+<!--			report_type="qweb-pdf"-->
+<!--			name="exzatech_exit_management.report_handover_form"-->
+<!--			file="exzatech_exit_management.report_handover_form"-->
+<!--            print_report_name="'Handover Form - %s' % (object.employee_id.name)"-->
+<!--		/>-->
+
+		<record id="handover_form_report" model="ir.actions.report">
+			<field name="name">Handover Form</field>
+			<field name="model">hr.resignation</field>
+			<field name="report_type">qweb-pdf</field>
+			<field name="report_name">exit_management.report_handover_form</field>
+			<field name="report_file">exit_management.report_handover_form</field>
+			<field name="print_report_name">'Handover Form - %s' % (object.employee_id.name)</field>
+			<field name="paperformat_id" ref="exit_management.paperformat_slip"/>
+			<field name="binding_model_id" ref="model_hr_resignation"/>
+			<field name="binding_type">report</field>
+		</record>
+
+	</data>
+
+</odoo>

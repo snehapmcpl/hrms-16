@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="paperformat_it_worksheet_for_employee" model="report.paperformat">
+        <field name="name">Income Tax Worksheet For Employee Paper format</field>
+        <field name="default" eval="False"/>
+        <field name="disable_shrinking" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">20</field>
+        <field name="margin_bottom">10</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="dpi">96</field>
+    </record>
+
+    <record id="report_it_worksheet_for_employee" model="ir.actions.report">
+        <field name="name">Income Tax Worksheet For Employee</field>
+        <field name="model">it.returns</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">Itax_calculation_master.it_worksheet_for_employee_template</field>
+        <field name="report_file">Itax_calculation_master.it_worksheet_for_employee_template</field>
+        <field name="print_report_name">'IT Worksheet For - %s' % (object.employee_id.name or False)</field>
+        <field name="binding_model_id" ref="model_it_returns"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_it_worksheet_for_employee"/>
+    </record>
+</odoo>

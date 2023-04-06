@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+view_hr_resignation,view.hr.resignation,model_hr_resignation,,1,1,1,1
+view_resignation_request_wizard,view.resignation.request.wizard,model_resignation_request_wizard,,1,1,1,1
+view_notice_period_days,view.notice.period.days,model_notice_period_days,,1,1,1,1
+view_hr_resignation_line,view.hr.resignation.line,model_hr_resignation_line,,1,1,1,1
+view_hr_settlement_input,view.hr.settlement.input,model_hr_settlement_input,,1,1,1,1
+view_hr_settlement_input_type,view.hr.settlement.input.type,model_hr_settlement_input_type,,1,1,1,1
+
+
+
+

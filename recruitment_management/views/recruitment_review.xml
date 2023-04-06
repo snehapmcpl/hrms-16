@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_recruitment_review" model="ir.ui.view">
+        <field name="name">recruitment.review.form</field>
+        <field name="model">recruitment.review</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" required="1"/>
+                        <field name="employee_id" invisible="1"/>
+                    </group>
+                    <notebook>
+                        <page name="questions_template" string="Template">
+                            <field name="questions_temp_ref">
+                                <tree editable="bottom">
+                                    <field name="questions_que" required="1"/>
+                                    <field name="review"/>
+                                    <field name="review_form" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_recruitment_review_tree">
+        <field name="name">recruitment.review.tree</field>
+        <field name="model">recruitment.review</field>
+        <field name="arch" type="xml">
+            <tree string="Review Template">
+                <field name="name"/>
+                <field name="employee_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_review_template" model="ir.actions.act_window">
+        <field name="name">Review Template</field>
+        <field name="res_model">recruitment.review</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="review_template_menu"
+              name="Review Template"
+              groups="hr_recruitment.group_hr_recruitment_manager"
+              sequence="100"
+              parent="hr_recruitment.menu_hr_recruitment_root"
+              action="action_review_template"/>
+</odoo>

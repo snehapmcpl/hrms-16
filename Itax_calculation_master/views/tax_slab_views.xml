@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="it_returns_tax_slab_tree" model="ir.ui.view">
+        <field name="name">tax.slab.tree</field>
+        <field name="model">tax.slab</field>
+        <field name="arch" type="xml">
+            <tree string="Tax Slab">
+                <field name="name"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="age_group"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="it_returns_tax_slab_form" model="ir.ui.view">
+        <field name="name">tax.slab.form</field>
+        <field name="model">tax.slab</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" required="1"/>
+                            <field name="age_group" required="1"/>
+                        </group>
+                        <group>
+                            <field name="date_from" required="1"/>
+                            <field name="date_to" required="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="slab_line" string="Slab Lines">
+                            <field name="line_ids">
+                                <tree editable="bottom">
+                                    <field name="lower_limit" required="1"/>
+                                    <field name="higher_limit" required="1"/>
+                                    <field name="tax_per" required="1"/>
+                                    <field name="tax_slab_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="section87a" string="Section 87A">
+                            <field name="section87a_ids">
+                                <tree editable="bottom">
+                                    <field name="lower_limit" required="1"/>
+                                    <field name="higher_limit" required="1"/>
+                                    <field name="tax_amount" required="1"/>
+                                    <field name="tax_slab_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="surcharge" string="Surcharge">
+                            <field name="surcharge_ids">
+                                <tree editable="bottom">
+                                    <field name="lower_limit" required="1"/>
+                                    <field name="higher_limit" required="1"/>
+                                    <field name="tax_per" required="1"/>
+                                    <field name="tax_slab_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="cess" string="Cess">
+                            <field name="cess_ids">
+                                <tree editable="bottom">
+                                    <field name="lower_limit" required="1"/>
+                                    <field name="higher_limit" required="1"/>
+                                    <field name="tax_per" required="1"/>
+                                    <field name="tax_slab_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_it_returns_tax_slab">
+        <field name="name">Tax Slab</field>
+        <field name="res_model">tax.slab</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

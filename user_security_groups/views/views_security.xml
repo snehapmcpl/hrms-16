@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr.menu_hr_root" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [ref('group_user_director'), ref('group_user_hr_admin')])]"/>
+    </record>
+
+    <record id="om_hr_payroll.menu_hr_payroll_root" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [ref('group_user_director'), ref('group_user_hr_admin')])]"/>
+    </record>
+
+    <record id="hr_holidays.menu_hr_holidays_root" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [ref('group_user_director'), ref('group_user_hr_admin'), ref('group_user_managers')])]"/>
+    </record>
+
+    <record id="hr_attendance.menu_hr_attendance_root" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [ref('hr_attendance.group_hr_attendance')])]"/>
+    </record>
+
+     <record id="survey.menu_surveys" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [ref('group_user_director'),ref('group_user_hr_admin')])]"/>
+    </record>
+
+    <record id="hr_recruitment.menu_hr_recruitment_configuration" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [ref('group_user_hr_admin')])]"/>
+    </record>
+
+     <record id="hr_recruitment.report_hr_recruitment" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [ref('group_user_hr_admin')])]"/>
+    </record>
+
+    <record id="om_hr_payroll.menu_payroll_employee" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [ref('group_user_hr_admin')])]"/>
+    </record>
+
+    <record id="om_hr_payroll.menu_hr_payroll_report" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [ref('group_user_hr_admin')])]"/>
+    </record>
+
+      <record model="ir.ui.view" id="hr_employee_hide_form_view">
+        <field name="name">hr.employee.form.view.hide</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

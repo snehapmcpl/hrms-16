@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_employee_background" model="ir.ui.view">
+        <field name="name">employee.background.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/group/field[@name='certificate']" position="after">
+                <field name="background_emp" string="Employee Background" widget="section_and_note_one2many" mode="tree">
+                    <tree>
+                        <field name="college_name_emp" optional="show"/>
+                        <field name="certificate_level" optional="show"/>
+                        <field name="specialization_emp" optional="show"/>
+                        <field name="highest_degree" options="{'no_create_edit': True}" optional="show"/>
+                        <field name="other_skill" optional="hide"/>
+                        <field name="board" optional="hide"/>
+                        <field name="roll_no" optional="hide"/>
+                        <field name="from_month_date" optional="show"/>
+                        <field name="end_month_date" optional="show"/>
+                    </tree>
+                    <form>
+                        <group>
+                            <field name="college_name_emp"/>
+                            <field name="certificate_level"/>
+                            <field name="specialization_emp"/>
+                            <span class="o_form_label o_td_label" name="background_name">
+                                <b>Address</b>
+                            </span>
+                            <div class="o_background_format">
+                                <field name="street_background" placeholder="Street..." class="o_address_street"/>
+                                <field name="street2_background" placeholder="Street 2..."
+                                       class="o_address_street"/>
+                                <field name="city_background" placeholder="City" class="o_address_city"/>
+                                <field name="state_id_background" class="o_address_state" placeholder="State"
+                                       options="{'no_open': True, 'no_quick_create': True}"/>
+                                <field name="pincode_background" placeholder="PIN CODE" class="o_address_zip"/>
+                                <field name="country_id_background" placeholder="Country" class="o_address_country"
+                                       options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                            </div>
+                            <field name="highest_degree" options="{'no_create_edit': True}"/>
+                            <field name="other_skill"/>
+                            <field name="board"/>
+                            <field name="roll_no"/>
+                            <field name="from_month_date"/>
+                            <field name="end_month_date"/>
+                        </group>
+                    </form>
+                </field>
+            </xpath>
+        </field>
+    </record>
+</odoo>

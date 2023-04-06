@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="payroll_summary_report_xls" model="ir.actions.report">
+        <field name="name">Summary Report</field>
+        <field name="model">payroll.summary.report.wizard</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">payroll_summary.payroll_summary_report_xls</field>
+        <field name="report_file">payroll_summary.payroll_summary_report_xls</field>
+         <field name="print_report_name">"'Report - %s' % (object.report_type).replace('/', '')"</field>
+        <field name="binding_type">report</field>
+    </record>
+
+
+</odoo>

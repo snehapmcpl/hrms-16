@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="hr_employee_form" model="ir.ui.view">
+        <field name="name">hr.employee.form.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='coach_id']" position="after">
+                <field name="employee_pan_no"/>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="relieving_date"/>
+            </xpath>
+            <xpath expr="//field[@name='country_of_birth']" position="after">
+                <label for="age" string="Age"/>
+                <div class="o_row" name="div_age">
+                    <field name="age"/><span>years</span>
+                </div>
+                <field name="blood_group_rel"/>
+            </xpath>
+            <xpath expr="//group[@name='active_group']" position="after">
+                <group name="salary_info" string="Salary Info">
+                    <field name="total_ctc"/>
+                    <field name="mbo"/>
+                </group>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page name="tax_details" string="Tax Details">
+                    <group>
+                        <group>
+                            <field name="tax_regim_type" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="city_type_conf" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="rent_paid"/>
+                            <field name="rental_line_counts" invisible="1"/>
+                            <button string="Create lines" class="oe_highlight"
+                                    type="object" name="create_lines"
+                                    attrs="{'invisible':[('rental_line_counts', '!=', 0)]}"/>
+                            <button string="Update lines" class="oe_highlight"
+                                    type="object" name="update_lines"
+                                    attrs="{'invisible':[('rental_line_counts', '=', 0)]}"/>
+                        </group>
+                        <group colspan="2">
+                            <field name="rental_line_ids" widget="one2many" nolabel="1">
+                                <tree create="0">
+                                    <field name="date_from"/>
+                                    <field name="date_to"/>
+                                    <field name="rent_paid"/>
+                                    <field name="city_type_conf"/>
+                                    <field name="employee_id" invisible="1"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="date_from" readonly="1"/>
+                                            <field name="date_to" readonly="1"/>
+                                            <field name="employee_id" readonly="1"/>
+                                        </group>
+                                        <group>
+                                            <field name="rent_paid"/>
+                                            <field name="city_type_conf"/>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/group/field[@name='address_home_id']" position="after">
+                <field name="self_record" invisible="1"/>
+                <span class="o_form_label o_td_label" name="address_name">
+                    <b>Present Address</b>
+                </span>
+                <div class="o_address_format">
+                    <field name="son_dot_of" placeholder="S/O or D/O"/>
+                    <field name="street_emp" placeholder="Street..." class="o_address_street"/>
+                    <field name="street2_emp" placeholder="Street 2..." class="o_address_street"/>
+                    <field name="city_emp" placeholder="City" class="o_address_city"/>
+                    <field name="state_id_emp" class="o_address_state" placeholder="State"
+                           options="{'no_open': True, 'no_quick_create': True}"/>
+                    <field name="zip_emp" placeholder="PIN CODE" class="o_address_zip"/>
+                    <field name="country_id_emp" placeholder="Country" class="o_address_country"
+                           options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                </div>
+                <span class="o_form_label o_td_label" name="address_name">
+                    <b>Permanent Address</b>
+                </span>
+                <div class="o_address_format">
+                    <field name="son_dot_of2" placeholder="S/O or D/O"/>
+                    <field name="street_permanent" placeholder="Street..." class="o_address_street"/>
+                    <field name="street2_permanent" placeholder="Street 2..." class="o_address_street"/>
+                    <field name="city_permanent" placeholder="City" class="o_address_city"/>
+                    <field name="state_id_permanent" class="o_address_state" placeholder="State"
+                           options="{'no_open': True, 'no_quick_create': True}"/>
+                    <field name="pincode_permanent" placeholder="PIN CODE" class="o_address_zip"/>
+                    <field name="country_id_permanent" placeholder="Country" class="o_address_country"
+                           options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                </div>
+                <span class="o_form_label o_td_label" name="father_name" invisible="1">
+                    <b>Father Details</b>
+                </span>
+                <div class="o_details_format">
+                    <field name="father_name_emp" placeholder="Name" invisible="1"/>
+                    <field name="father_dob" placeholder="DOB" invisible="1"/>
+                </div>
+                <span class="o_form_label o_td_label" name="mother_name" invisible="1">
+                    <b>Mother Details</b>
+                </span>
+                <div class="o_details_format">
+                    <field name="mother_name_emp" placeholder="Name" invisible="1"/>
+                    <field name="mother_dob" placeholder="DOB" invisible="1"/>
+                </div>
+                <span class="o_form_label o_td_label" name="spouse_name">
+                    <b>Spouse Details</b>
+                </span>
+                <div class="o_details_format">
+                    <field name="spouse_name_emp" placeholder="Name" />
+                    <field name="spouse_dob" placeholder="DOB" />
+                </div>
+                <field name="bank_account_id"/>
+                <field name="uan_number"/>
+                <field name="aadhar_number"/>
+            </xpath>
+            <xpath expr="//field[@name='spouse_complete_name']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+             <xpath expr="//field[@name='spouse_birthdate']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+             <xpath expr="//field[@name='certificate']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='private_email']" position="attributes">
+                <attribute name="readonly">False</attribute>
+            </xpath>
+            <xpath expr="//field[@name='phone']" position="attributes">
+                <attribute name="readonly">False</attribute>
+            </xpath>
+             <xpath expr="//field[@name='relieving_date']" position="attributes">
+                <attribute name="readonly">True</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

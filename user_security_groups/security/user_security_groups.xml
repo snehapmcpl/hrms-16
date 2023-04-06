@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_hrms_users" model="ir.module.category">
+        <field name="name">HRMS</field>
+        <field name="sequence">17</field>
+    </record>
+    <record id="group_user_director" model="res.groups">
+        <field name="name">Director</field>
+        <field name="category_id" ref="module_category_hrms_users"/>
+    </record>
+     <record id="group_user_hr_admin" model="res.groups">
+        <field name="name">HR Admin</field>
+        <field name="category_id" ref="module_category_hrms_users"/>
+    </record>
+    <record id="group_user_managers" model="res.groups">
+        <field name="name">Manager/Team Lead</field>
+        <field name="category_id" ref="module_category_hrms_users"/>
+    </record>
+    <record id="group_user_employee" model="res.groups">
+        <field name="name">Employee</field>
+        <field name="category_id" ref="module_category_hrms_users"/>
+    </record>
+
+<!--     <record id="hr_attendance.group_hr_attendance_user" model="res.groups">-->
+<!--        <field name="name">Officer</field>-->
+<!--        <field name="category_id" ref="base.module_category_human_resources_attendances"/>-->
+<!--        <field name="implied_ids" eval="[(4, ref('hr_attendance.group_hr_attendance'))]"/>-->
+<!--    </record>-->
+</odoo>

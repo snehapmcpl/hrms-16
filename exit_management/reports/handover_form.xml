@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_handover_form">
+        <t t-call="web.basic_layout">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page" style="padding-right: 5%; padding-left: 5%;">
+                        <table>
+                            <tr>
+                                <td colspan="4" style="width:2800px; font-size: 16px; text-align: center; border: 1px solid black;" >
+                                        Handover Form
+                                </td>
+                                <td colspan="1" style="width:200px; text-align: left; border: 1px solid black; padding-right: 2px;" >
+                                        Date:
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table>
+                            <tr>
+                                <td style="width: 3000px; height: 5%; valign: center; font-size: 15px; padding: 5px;">
+                                   I <b><span t-field ="doc.employee_id.name"/></b> , Designated as <span t-esc="doc.employee_id.job_title"/> here by hand over the Charge of my office to Mr/Ms.<span t-esc="doc.employee_id.parent_id.name"/> <span t-esc="doc.employee_id.parent_id.job_title"/> on <span t-esc="datetime.datetime.now().strftime('%d-%b-%Y')"></span> .
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table>
+                            <tr>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <b>Hardware - Item Handed Over</b>
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                    <b>Description</b>
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <b>Quantity</b>
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                    <b>Identification Numbers</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    1
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                </td>
+                                <td style="width: 300px height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    2
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <span>
+                                    </span>
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <span>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                    3
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <span>
+                                    </span>
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <span>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                    4
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <span>
+                                    </span>
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <span>
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table>
+                            <tr>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <b>Software - Item Handed Over</b>
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <b>Description</b>
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <b>Quantity</b>
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <b>Identification Numbers</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                    1
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    2
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                    <span>
+                                    </span>
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                    <span>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                    3
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                    <span>
+                                    </span>
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <span>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                    4
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <span>
+                                    </span>
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <span>
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table>
+                            <tr>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                    <b>Customer Supplied Items Item Handed Over</b>
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <b>Description</b>
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                    <b>Quantity</b>
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                    <b>Identification Numbers</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                    1
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    2
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <span>
+                                    </span>
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <span>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                    3
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                    <span>
+                                    </span>
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                    <span>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                    4
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <span>
+                                    </span>
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <span>
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table>
+                            <tr>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <b>Others - Item Handed Over</b>
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                    <b>Description</b>
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <b>Quantity</b>
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <b>Identification Numbers</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                    1
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;   padding: 5px;border: 1px solid black;">
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    2
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <span>
+                                    </span>
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                    <span>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                    3
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                    <span>
+                                    </span>
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <span>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                    4
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px;  padding: 5px;border: 1px solid black;">
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <span>
+                                    </span>
+                                </td>
+                                <td style="width: 300px; height: 4%; valign: center; font-size: 15px; padding: 5px;border: 1px solid black;">
+                                    <span>
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table>
+                            <tr>
+                                <td style="width: 1200px; height: 5%; valign: center; font-size: 15px;  border: 1px solid black;  padding: 5px;">
+                                    <br/>
+                                    (Signature of person handing over the charge)<br/>
+                                    Date:
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 1200px; height: 5%; valign: center; font-size: 15px;  border: 1px solid black; padding: 5px;">
+                                    <br/>
+                                    (Signature of person taking over the charge)<br/>
+                                    Date:
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td style="width: 1200px; height: 5%; valign: center; font-size: 15px; border: 1px solid black;  padding: 5px;">
+                                    <br/>
+                                    (Signature of the Function Head)<br/>
+                                    Date:
+                                </td>
+                            </tr>
+                        </table>
+                        <br/><br/><br/>
+                        <table>
+                            <tr>
+                                <td colspan="4" style="width:2800px; text-align: left; " >
+                                       <span t-esc='doc.company_id.partner_id.name'/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+    </t>
+    </template>
+</odoo>

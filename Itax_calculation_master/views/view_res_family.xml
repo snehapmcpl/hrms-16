@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_employee_family_page" model="ir.ui.view">
+        <field name="name">employee.family.page.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/notebook" position="inside">
+                <page name="family_details" string="Family Details">
+                    <group string="Family Details(For Mediclaim Insurance)">
+                        <field name="family_details" widget="section_and_note_one2many" mode="tree">
+                            <tree>
+                                <field name="relationship_family" optional="show"/>
+                                <field name="name_family" optional="show"/>
+                                <field name="date_of_birth_rel" optional="show"/>
+                                <field name="age_rel" optional="show"/>
+                                <field name="gender_rel" optional="show"/>
+                                <field name="date_of_marriage" optional="hide"/>
+                                <field name="blood_group_rel" optional="hide"/>
+                                <field name="Physically_disabled" optional="hide"/>
+                                <field name="if_yes" optional="hide"/>
+                            </tree>
+                            <form>
+                                <group>
+                                    <field name="relationship_family"/>
+                                    <field name="name_family"/>
+                                    <field name="date_of_birth_rel"/>
+                                    <field name="age_rel"/>
+                                    <field name="gender_rel"/>
+                                    <field name="date_of_marriage"/>
+                                    <field name="blood_group_rel"/>
+                                    <field name="Physically_disabled"/>
+                                    <field name="if_yes"/>
+                                </group>
+                            </form>
+                        </field>
+                    </group>
+                    <group name="references_details" string="References">
+                        <group string="References One">
+                            <field name="name_ref"/>
+                            <field name="designation_ref"/>
+                            <field name="know_ref"/>
+                            <field name="phone_ref"/>
+                        </group>
+                        <group string="References Two">
+                            <field name="name_ref_two"/>
+                            <field name="designation_ref_two"/>
+                            <field name="know_ref_two"/>
+                            <field name="phone_ref_two"/>
+                        </group>
+                    </group>
+                </page>
+
+            </xpath>
+        </field>
+    </record>
+</odoo>

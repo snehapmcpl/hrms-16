@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="employee_tds_tree" model="ir.ui.view">
+        <field name="name">employee.tds.tree</field>
+        <field name="model">employee.tds</field>
+        <field name="arch" type="xml">
+            <tree string="Monthly TDS Recovery details">
+                <field name="employee_id"/>
+                <field name="month"/>
+                <field name="income_tax" sum="Total Income Tax"/>
+                <field name="surcharge" sum="Total Surcharge"/>
+                <field name="cess" sum="Total Cess"/>
+                <field name="total_amount" sum="Total"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="employee_tds_form" model="ir.ui.view">
+        <field name="name">employee.tds.form</field>
+        <field name="model">employee.tds</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="update_payslip" type="object"
+                            string="Update to Payslip"  attrs="{'invisible':[('payslip_state','in',['done','cancel'])]}"
+                            data-hotkey="p" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="month"/>
+                            <field name="date" invisible="1"/>
+                            <field name="payslip_id" invisible="1"/>
+                            <field name="payslip_state" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="income_tax"/>
+                            <field name="surcharge"/>
+                            <field name="cess"/>
+                            <field name="total_amount"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Lines" name="lines">
+                            <field name="line_ids" readonly="1">
+                                <tree>
+                                    <field name="salary_rule_id"/>
+                                    <field name="amount"/>
+                                    <field name="tds_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Computed Lines" name="computed_lines">
+                            <field name="computed_line_ids" readonly="1">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="amount"/>
+                                    <field name="tds_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_employee_tds">
+        <field name="name">Monthly TDS Recovery details</field>
+        <field name="res_model">employee.tds</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

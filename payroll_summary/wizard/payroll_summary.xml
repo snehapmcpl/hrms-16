@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="payroll_summary_form" model="ir.ui.view">
+            <field name="name">payroll.summary.report.wizard.form</field>
+            <field name="model">payroll.summary.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Payroll Summary">
+                   <sheet>
+                       <group>
+                           <group>
+                             <field name="report_type"/>
+                             <field name="earnings_deductions" attrs="{'invisible': [('report_type', '!=', 'earnings deductions')]}"/>
+                             <field name="employee_name" attrs="{'invisible': [('report_type', '!=', 'individual pay')]}"/>
+                             <field name="structure_id" attrs="{'invisible': [('report_type', '!=', 'monthly pay')]}"/>
+                             <field name="date_from"/>
+                             <field name="date_to"/>
+                           </group>
+                       </group>
+                       <footer>
+                           <button string="Generate Report" name="generate_payroll_summary" type="object" class="btn-primary"/>
+                       </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+    <record id="payroll_summary_reports_action" model="ir.actions.act_window">
+        <field name="name">Payroll Summary</field>
+        <field name="res_model">payroll.summary.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="payroll_summary_form" />
+        <field name="target">new</field>
+    </record>
+
+
+
+
+
+
+
+
+</odoo>

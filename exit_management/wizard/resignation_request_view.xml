@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="resignation_request_wizard_form" model="ir.ui.view">
+            <field name="name">resignation.request.wizard.form</field>
+            <field name="model">resignation.request.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Resignation Request">
+                   <sheet>
+                       <group>
+                           <group>
+                             <field name="employee_id" readonly="1"/>
+                             <field name="date_of_resignation" readonly="1"/>
+<!--                             <field name="notice_period" readonly="1"/>-->
+                             <field name="reason" required="1"/>
+                           </group>
+                       </group>
+                       <footer>
+                           <button string="Submit Request" name="submit_request" type="object" class="btn-primary"/>
+                           <button string="Cancel" class="btn-secondary" special="cancel"/>
+                       </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+    <record id="create_resignation_request" model="ir.actions.act_window">
+        <field name="name">Create Resigntion Request</field>
+        <field name="res_model">resignation.request.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="resignation_request_wizard_form" />
+        <field name="target">new</field>
+    </record>
+
+
+
+</odoo>

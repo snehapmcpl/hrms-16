@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+                <record id="views_income_tax_Wizard_form11" model="ir.ui.view">
+                    <field name="name">income tax wizard form</field>
+                    <field name="model">income.tax.wizard</field>
+                    <field name="arch" type="xml">
+                        <form>
+                                <group>
+                                    <group>
+                                        <field name="date_from"/>
+                                    </group>
+                                    <group>
+                                        <field name="date_to"/>
+                                    </group>
+                                </group>
+                                <footer>
+                                    <button string="Print Excel" type="object" name="generate_xlsx_report" class="btn btn-primary" />
+                                    <button string="Cancel" special="cancel"  class="btn btn-secondary"/>
+
+                                </footer>
+
+                        </form>
+                    </field>
+                </record>
+
+
+
+        <record model="ir.actions.act_window" id="action_income_tax_Wizard">
+            <field name="name">Income Tax Wizard</field>
+            <field name="res_model">income.tax.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

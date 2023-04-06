@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="appointment_letter_template">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <t t-foreach="docs" t-as="doc">
+                        <style>
+                            table {
+                                padding-left: 5px;
+                                font-size: 16px;
+                                font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+                            }
+                        </style>
+                        <table>
+                            <tr>
+                                <td style="text-align: right; line-height: normal; padding-right: 0%;"
+                                    colspan="2">
+                                    <span>
+                                        <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)"
+                                             alt="Logo" width="25%;"/>
+                                    </span>
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="width: 25%;text-align: right;">
+                                    <b style="font-size: 15px;padding-bottom:5px;">CIN:
+                                    <span t-esc="doc.company_id.cin_emp"/></b><br/>
+                                    <b style="font-size: 15px;padding-bottom:5px;">UAN No:
+                                    <span t-esc="doc.company_id.uan_emp"/></b><br/>
+                                    <b style="font-size: 15px;">Startup:
+                                    <span t-esc="doc.company_id.startup_emp"/></b>
+                                </td>
+                            </tr>
+                            <tr style="width: 100%;">
+                                <td colspan="2">
+                                    <center>
+                                        <u><h1><b>LETTER OF APPOINTMENT</b></h1></u>
+                                    </center>
+                                </td>
+                            </tr>
+                            <tr>
+                                <t t-if="doc.appointment_date">
+                                   <td style="font-size: 20px; text-align: left;">
+                                        <b><u>Ref:</u>
+                                            <span t-esc="doc.appointment_reference"/>
+                                        </b>
+                                        <br/>
+                                        Date:
+                                        <span style="font-size: 18px" t-esc="doc.appointment_date.strftime('%B-%d-%Y')"/>
+                                   </td>
+                                </t>
+                                <td style="text-align: right;">
+                                    <b>
+                                        <t style="font-size: 18px;padding-bottom:2px;" t-esc="doc.company_id.name"/>
+                                    </b>
+                                    <br/>
+<!--                                    <span style="font-size: 13px">-->
+                                        <t style="font-size: 18px;padding-bottom:2px;" t-esc="doc.company_id.street"/>,<t t-esc="doc.company_id.street2"/>,
+                                        <t t-esc="doc.company_id.city"/>
+                                        -
+                                        <t t-esc="doc.company_id.zip"/>
+                                        <br/>
+                                        <t style="font-size: 18px;padding-bottom:2px;" t-esc="doc.company_id.state_id.name"/>,
+                                        <t t-esc="doc.company_id.country_id.name"/>
+                                        <br/>
+                                        Phone:
+                                        <t style="font-size: 18px;padding-bottom:2px;" t-esc="doc.company_id.phone"/>
+                                        <br/>
+                                        Email:
+                                        <t style="font-size: 18px;padding-bottom:2px;" t-esc="doc.company_id.email"/>
+                                        <br/>
+                                        URL:
+                                        <t t-esc="doc.company_id.website"/>
+<!--                                    </span>-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colsapn="2" style="text-align: left; font-size: 20px">
+                                    To,<br/>
+                                    <span><t t-esc="doc.get_title()"/> </span> <span t-esc="doc.name"/><br/>
+                                    <t t-if="doc.state_id_emp">
+                                        <span t-esc="doc.state_id_emp.name"/>
+                                    </t>, India
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colsapn="2" style="text-align: left; font-size: 20px;padding-top: 30px;">
+                                    Dear
+                                    <span t-esc="doc.get_partner_first_name()"/>,
+                                </td>
+                            </tr>
+                        </table>
+                        <table>
+                            <tr>
+                                <td colsapn="4"
+                                    style="width: 1000px;  text-align: left; font-size: 20px;padding-top: 30px;">
+                                    <p><span t-esc='doc.company_id.partner_id.name'/>, is promoting and supporting
+                                        open-source software solutions in the areas of Virtualization And cloud
+                                        Computing, Information Management (Business Intelligence and Data Warehousing),
+                                        Information Security (Log Management, Reporting, Compliance reporting etc.),
+                                        Infrastructure Solution (Infrastructure performance monitoring, Service Desk
+                                        Solutions) And Software Modernization.
+                                    </p>
+
+                                    <p>
+                                        Following your meeting with us, and our offer letter to you, we are pleased to
+                                        appoint you as <b><span t-esc="doc.recruitment_id.job_id.name"/> </b>
+                                        with the Employee ID of <t t-esc="doc.identification_id"/>
+                                        on the following terms and conditions:
+                                    </p>
+
+                                    <p>
+                                        1.<b>Commencement:</b>Your appointment will commence from
+                                        <b><t t-esc="doc.date_join"/></b> .
+                                    </p>
+                                    <p>
+                                        2.<b>Salary:</b>You will be paid a yearly gross salary of Rs.
+                                        <b><t t-esc="doc.total_ctc"/></b>
+                                        /- <b>(Rupees
+                                        <t t-esc="doc.amount_in_words(doc.total_ctc)"/>
+                                        Only)</b>, the detailed breakup of the same enclosed.
+                                    </p>
+                                    <p>
+                                        3.<b>Place of Posting:</b> Your present place of posting will be at
+                                        <b><t t-esc="doc.work_location_id.name"/></b>
+                                        . However, you are subject to be transferred by the company at its discretion to
+                                        any of its departments/ office/ Branches,
+                                        within India and abroad depending upon the needs and requirements of the
+                                        company.
+                                    </p>
+                                    <p>
+                                        4.<b>Probation:</b> The <b><t t-esc="doc.recruitment_id.probationary_period"/></b> Months shall be treated as probationary period.
+                                        During this probationary period, the employment may terminate from either side
+                                        by giving a written notice of 15 days.
+                                    </p>
+                                    <p>
+                                        5.<b>Termination:</b> “After confirmation of your employment, notice of
+                                        resignation and termination of employment will be
+                                        <b><t t-if="doc.total_ctc &lt; 500000">2</t>
+                                        <t t-if="doc.total_ctc &gt;= 500000">3</t>
+                                        months’</b> notice in writing or on management decision
+                                        <b><t t-if="doc.total_ctc &lt; 500000">2</t>
+                                        <t t-if="doc.total_ctc &gt;= 500000">3</t>
+                                        month’s </b> salary in lieu of notice period from either party.
+                                    </p>
+                                    <p>
+                                        However, the requirement of notice period from the company shall not arise
+                                        involving turpitude; or unauthorized absence from the place of work for 7
+                                        consecutive days or more; or overstays without proper sanction for more than 7
+                                        days exclusive of weekly off and holidays.
+                                    </p>
+                                    <p>
+                                        6.<b>Duties and Responsibilities:</b>  Company’s personnel are it’s whole-time
+                                        employees and you shall engage yourself in any outside work over and above
+                                        legitimate work in the company on duty days, on holidays or when you are on
+                                        leave without obtaining the management’s prior permission in writing. Any
+                                        contravention of this condition will entail disciplinary action against you. Any
+                                        changes in residential address should be intimated to us in within a week of
+                                        such change.
+                                    </p>
+                                    <p>
+                                        7.<b>Verification Report:</b> This appointment and its continuance are subject
+                                        to receipt of satisfactory verification of your antecedent and the information
+                                        furnished by you in the application form for employment with company.
+                                    </p>
+                                    <p>
+                                        8.<b>Handover:</b>  You will be required to handover all the articles in good
+                                        conditions that were given to you either for your use/care/custody at time of
+                                        your severance from the company and obtain a “NO DUE CERTIFICATE”. Final
+                                        settlement of your accounts will be made only on your handing over the same to a
+                                        designated representative of the company.
+                                    </p>
+                                    <p>
+                                        9.<b>Jurisdiction:</b>Any dispute that may arise during the period of employment
+                                        or after shall be referred to in the courts in Bengaluru jurisdiction only.
+                                    </p>
+                                    <p>
+                                        10.<b>Physical Fitness:</b>Any dispute that may arise during the period of employment
+                                        or after shall be referred to in the courts in Bengaluru jurisdiction only.
+                                    </p>
+                                    <p>
+                                        11.<b>General:</b>
+                                        <p>a). This appointment letter and the terms therein are governed by the HR Handbook, published.</p>
+                                        <p>b). Company reserves the right to amend the terms of employment based on the business, legal or compliance needs, and you give your consent to the terms specified in HR Handbook, amended, and published time-to-time.</p>
+                                        <p>c). Terms specified in HR Handbook amended and published time-to-time, stands final and supersedes the terms specified in this letter.</p>
+                                    </p>
+                                    <p>If the above terms and conditions are acceptable to you, kindly sign at the
+                                        bottom of each page of the duplicate copy of this letter and return the same as
+                                        token of acceptance.
+                                    </p>
+                                    <p>We welcome you to <span t-esc='doc.company_id.partner_id.name'/> and look forward to long years of a mutually satisfying association.</p>
+                                    <p><b>For <span t-esc='doc.company_id.partner_id.name'/>,</b></p><br/><br/><br/>
+                                    <p>
+                                        <t t-esc="doc.company_id.director_id.name"/><br/>
+                                        <b>Director</b>
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                        <div style="page-break-after:always"/>
+                        <table>
+                            <tr style="padding-top:40px;">
+                                <td colsapn="4"
+                                    style="text-align: center; font-size: 20px;padding-top: 10px;">
+                                    <b>
+                                        Salary Break UP
+                                    </b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colsapn="4" style="text-align: center;padding: 5px; ">
+                                    <table style="font-size: 18px;">
+                                        <t t-set="total" t-value="0"/>
+                                        <t t-set="total_annual" t-value="0"/>
+                                        <tr>
+                                            <td style="width: 333px;  text-align: center; font-size: 20px;padding: 5px;border: 1px solid black;">
+                                                <b>
+                                                    SALARY COMPONENT
+                                                </b>
+                                            </td>
+                                            <td style="width: 333px;  text-align: center; font-size: 20px;padding: 5px;border: 1px solid black;">
+                                                <b>
+                                                    CTC (₹)
+                                                </b>
+                                            </td>
+                                            <td style="width: 333px;  text-align: center; font-size: 20px;padding: 5px;border: 1px solid black;">
+                                                <b>
+                                                    Gross CTC (₹)
+                                                </b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 333px;text-align: left; font-size: 20px;padding: 5px;border: 1px solid black;">
+                                                Basic Salary
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="round(doc.recruitment_id.salary_breakup_id.basic_salary, 2)"/>
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="round(doc.recruitment_id.salary_breakup_id.basic_salary / 12, 2)"/>
+                                            </td>
+                                        </tr>
+                                        <t t-set="total" t-value="total + round(doc.recruitment_id.salary_breakup_id.basic_salary / 12, 2)"/>
+                                        <t t-set="total_annual" t-value="total_annual + round(doc.recruitment_id.salary_breakup_id.basic_salary, 2)"/>
+                                        <tr>
+                                            <td style="width: 333px;text-align: left; font-size: 20px;padding: 5px;border: 1px solid black;">
+                                                HRA
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="round(doc.recruitment_id.salary_breakup_id.hra, 2)"/>
+                                            </td>
+                                            <td style="width: 333px; text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="round(doc.recruitment_id.salary_breakup_id.hra / 12, 2)"/>
+                                            </td>
+                                        </tr>
+                                        <t t-set="total" t-value="total + round(doc.recruitment_id.salary_breakup_id.hra / 12, 2)"/>
+                                        <t t-set="total_annual" t-value="total_annual + round(doc.recruitment_id.salary_breakup_id.hra, 2)"/>
+                                        <tr>
+                                            <td style="width: 333px;text-align: left; font-size: 20px;padding: 5px;border: 1px solid black;">
+                                                Standard Deduction
+                                            </td>
+                                            <td style="width: 333px; text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="round(doc.recruitment_id.salary_breakup_id.standard_deduction, 2)"/>
+                                            </td>
+                                            <td style="width: 333px; text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="round(doc.recruitment_id.salary_breakup_id.standard_deduction / 12, 2)"/>
+                                            </td>
+                                        </tr>
+                                        <t t-set="total" t-value="total + round(doc.recruitment_id.salary_breakup_id.standard_deduction / 12, 2)"/>
+                                        <t t-set="total_annual" t-value="total_annual + round(doc.recruitment_id.salary_breakup_id.standard_deduction, 2)"/>
+                                        <tr>
+                                            <td style="width: 333px;text-align: left; font-size: 20px;padding: 5px;border: 1px solid black;">
+                                                Leave Travel Allowance
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="round(doc.recruitment_id.salary_breakup_id.leave_travel_allowance, 2)"/>
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="round(doc.recruitment_id.salary_breakup_id.leave_travel_allowance / 12, 2)"/>
+                                            </td>
+                                        </tr>
+                                        <t t-set="total" t-value="total + round(doc.recruitment_id.salary_breakup_id.leave_travel_allowance / 12, 2)"/>
+                                        <t t-set="total_annual" t-value="total_annual + round(doc.recruitment_id.salary_breakup_id.leave_travel_allowance, 2)"/>
+                                        <tr>
+                                            <td style="width: 333px;text-align: left; font-size: 20px;padding: 5px;border: 1px solid black;">
+                                                Special Allowances
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="round(doc.recruitment_id.salary_breakup_id.special_allowance, 2)"/>
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="round(doc.recruitment_id.salary_breakup_id.special_allowance / 12, 2)"/>
+                                            </td>
+                                        </tr>
+                                        <t t-set="total" t-value="total + round(doc.recruitment_id.salary_breakup_id.special_allowance / 12, 2)"/>
+                                        <t t-set="total_annual" t-value="total_annual + round(doc.recruitment_id.salary_breakup_id.special_allowance, 2)"/>
+                                        <tr>
+                                            <td style="width: 333px;text-align: left; font-size: 20px;padding: 5px;border: 1px solid black;">
+                                                Food Coupon
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="round(doc.recruitment_id.salary_breakup_id.food_coupon, 2)"/>
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="round(doc.recruitment_id.salary_breakup_id.food_coupon / 12, 2)"/>
+                                            </td>
+                                        </tr>
+                                        <t t-set="total" t-value="total + round(doc.recruitment_id.salary_breakup_id.food_coupon / 12, 2)"/>
+                                        <t t-set="total_annual" t-value="total_annual + round(doc.recruitment_id.salary_breakup_id.food_coupon, 2)"/>
+                                        <tr>
+                                            <td style="width: 333px;text-align: left; font-size: 20px;padding: 5px;border: 1px solid black;">
+                                                PF Employer Contribution
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="round(doc.recruitment_id.salary_breakup_id.pf_employer_contribution, 2)"/>
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="round(doc.recruitment_id.salary_breakup_id.pf_employer_contribution / 12, 2)"/>
+                                            </td>
+                                        </tr>
+                                        <t t-set="total" t-value="total + round(doc.recruitment_id.salary_breakup_id.pf_employer_contribution / 12, 2)"/>
+                                        <t t-set="total_annual" t-value="total_annual + round(doc.recruitment_id.salary_breakup_id.pf_employer_contribution, 2)"/>
+                                        <tr>
+                                            <td style="width: 333px;text-align: left; font-size: 20px;padding: 5px;border: 1px solid black;">
+                                                <b>TOTAL (₹)</b>
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <b><t t-esc="total_annual"/></b>
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <b><t t-esc="round((total),2)"/></b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 333px;text-align: left; font-size: 20px;padding: 5px;border: 1px solid black;">
+                                                Variable Allowance
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="doc.recruitment_id.salary_breakup_id.variable_allowance"/>
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="round(doc.recruitment_id.salary_breakup_id.variable_allowance / 12, 2)"/>
+                                            </td>
+                                        </tr>
+                                        <t t-set="total" t-value="total + round(doc.recruitment_id.salary_breakup_id.variable_allowance / 12, 2)"/>
+                                        <t t-set="total_annual" t-value="total_annual + round(doc.recruitment_id.salary_breakup_id.variable_allowance, 2)"/>
+                                        <tr>
+                                            <td style="width: 333px;text-align: left; font-size: 20px;padding: 5px;border: 1px solid black;">
+                                                <b>Grand Total (₹)</b>
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <b><t t-esc="total_annual"/></b>
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <b><t t-esc="round((total),2)"/></b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: left; font-size: 20px;padding: 5px;border: 1px solid black;" colspan="3">
+                                                <b>Deduction (₹)</b>
+                                            </td>
+        <!--                                    <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">-->
+        <!--                                        <t t-esc="doc.salary_breakup_id.deduction"/>-->
+        <!--                                    </td>-->
+        <!--                                    <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">-->
+        <!--                                        <t t-esc="doc.salary_breakup_id.deduction"/>-->
+        <!--                                    </td>-->
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 333px;text-align: left; font-size: 20px;padding: 5px;border: 1px solid black;">
+                                                PF Employer Contribution
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="doc.recruitment_id.salary_breakup_id.pf_employer_contribution"/>
+                                            </td>
+                                            <td style="width: 333px; text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="round(doc.recruitment_id.salary_breakup_id.pf_employer_contribution / 12, 2)"/>
+                                            </td>
+                                        </tr>
+                                        <t t-set="total" t-value="total - round(doc.recruitment_id.salary_breakup_id.pf_employer_contribution / 12, 2)"/>
+                                        <t t-set="total_annual" t-value="total_annual - round(doc.recruitment_id.salary_breakup_id.pf_employer_contribution, 2)"/>
+                                        <tr>
+                                            <td style="width: 333px;text-align: left; font-size: 20px;padding: 5px;border: 1px solid black;">
+                                                PF Employee Contribution
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="doc.recruitment_id.salary_breakup_id.pf_employee_contribution"/>
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="round(doc.recruitment_id.salary_breakup_id.pf_employee_contribution / 12, 2)"/>
+                                            </td>
+                                        </tr>
+                                        <t t-set="total" t-value="total - round(doc.recruitment_id.salary_breakup_id.pf_employee_contribution / 12, 2)"/>
+                                        <t t-set="total_annual" t-value="total_annual - round(doc.recruitment_id.salary_breakup_id.pf_employee_contribution, 2)"/>
+                                        <tr>
+                                            <td style="width: 333px;text-align: left; font-size: 20px;padding: 5px;border: 1px solid black;">
+                                                Professional Tax
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="doc.recruitment_id.salary_breakup_id.professional_tax"/>
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="round(doc.recruitment_id.salary_breakup_id.professional_tax / 12, 2)"/>
+                                            </td>
+                                        </tr>
+                                        <t t-set="total" t-value="total - round(doc.recruitment_id.salary_breakup_id.professional_tax / 12, 2)"/>
+                                        <t t-set="total_annual" t-value="total_annual - round(doc.recruitment_id.salary_breakup_id.professional_tax, 2)"/>
+                                        <tr>
+                                            <td style="width: 333px;text-align: left; font-size: 20px;padding: 5px;border: 1px solid black;">
+                                                Income Tax (TDS)
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="doc.recruitment_id.salary_breakup_id.income_tax_tds"/>
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="round(doc.recruitment_id.salary_breakup_id.income_tax_tds / 12, 2)"/>
+                                            </td>
+                                        </tr>
+                                        <t t-set="total" t-value="total - round(doc.recruitment_id.salary_breakup_id.income_tax_tds / 12, 2)"/>
+                                        <t t-set="total_annual" t-value="total_annual - round(doc.recruitment_id.salary_breakup_id.income_tax_tds, 2)"/>
+                                        <tr>
+                                            <td colspan="2"
+                                                style="width: 666px;text-align: center;font-size: 20px;padding: 5px;border: 1px solid black;">
+                                                Net Payable (₹)
+                                            </td>
+                                            <td style="width: 333px;text-align: right;padding: 5px;border: 1px solid black;">
+                                                <t t-esc="round((total),2)"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr >
+                                <td colsapn="4"
+                                    style="width: 1000px;  text-align: center; font-size: 20px;">
+                                    <b>
+                                        *Variable Allowance shall be paid yearly, based on performance review.
+                                    </b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colsapn="4" style="width: 1000px;  text-align: left; font-size: 20px;padding-top: 30px;">
+                                    <p>Apart from the above, as per company policies you may be entitled to Medical
+                                        Insurance, Telephone reimbursements, traveling reimbursements, etc defined in
+                                        the Company policy at various times.
+                                    </p>
+                                    <p>Payment of perquisites, allowances and reimbursements shall be subject to
+                                        provisions of Income Tax, as applicable.
+                                    </p>
+                                    <p>Your Sincerely,</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colsapn="4"
+                                    style="width: 1000px;  text-align: left; font-size: 20px;padding-top: 10px;">
+                                    <b>For <span t-esc='doc.company_id.partner_id.name'/>,</b>
+                                    <br/>
+                                    <br/>
+                                    <b>
+                                        <t t-esc="doc.company_id.director_id.name"/><br/>
+                                            Director
+                                    </b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colsapn="4" style="width: 1000px;  text-align: left; font-size: 20px;padding-top: 20px;">
+                                    Received and accepted the above offer
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colsapn="4" style="width: 1000px;font-size: 20px;  text-align: left; font-size: 20px;padding-top: 70px;">
+                                    <span t-esc="doc.name"/><br/>
+                                    Date:
+                                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%B-%d-%Y')"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

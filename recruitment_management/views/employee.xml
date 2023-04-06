@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_employee_view_form_inherit" model="ir.ui.view">
+        <field name="name">hr.employee.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="recruitment_id" invisible="1"/>
+            </xpath>
+            <xpath expr="//sheet/div[2]" position="after">
+                <div>
+                    <field name="title"/>
+                </div>
+            </xpath>
+            <xpath expr="//button[@name='%(hr.plan_wizard_action)d']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='address_home_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='identification_id']" position="attributes">
+                <attribute name="string">Employee No.</attribute>
+            </xpath>
+            <xpath expr="//notebook/page[@name='public']/div/div/group[1]" position="after">
+                <group string="Appointment">
+                    <field name="appointment_reference"/>
+                    <field name="appointment_date"/>
+                </group>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button string="Generate Appointment Letter" name="generate_appointment_letter" type="object"
+                        class="oe_highlight" attrs="{'invisible': [('active', '=', False)]}"
+                        groups="usergroups.group_hr_executive"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

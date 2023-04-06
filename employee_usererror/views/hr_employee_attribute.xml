@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_employee_hr_attr" model="ir.ui.view">
+        <field name="name">employee.hr.attr</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='spouse_name_emp']" position="replace">
+                <field name="spouse_name_emp" attrs="{'invisible': [('marital', 'not in', ['married', 'cohabitant'])]}" placeholder="Name"/>
+            </xpath>
+            <xpath expr="//field[@name='spouse_dob']" position="replace">
+                <field name="spouse_dob" attrs="{'invisible': [('marital', 'not in', ['married', 'cohabitant'])]}" placeholder="DOB"/>
+            </xpath>
+            <xpath expr="//span[@name='spouse_name']" position="attributes">
+                <attribute name="attrs">{'invisible': [('marital', 'not in', ['married', 'cohabitant'])]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='passport_number']" position="replace">
+                <field name="passport_id" string="Number"/>
+            </xpath>
+            <xpath expr="//field[@name='passport_id']" position="attributes">
+                <attribute name="attrs">{'invisible': 1}</attribute>
+            </xpath>
+            <xpath expr="//group[@name='has_work_permit']" position="attributes">
+                <attribute name="attrs">{'invisible': 1}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='total_exp']" position="after">
+                <field name="grade_emp"/>
+            </xpath>
+            <xpath expr="//notebook/page[@name='personal_information']/group/group[6]" position="attributes">
+                <attribute name="attrs">{'invisible': 1}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='spouse_complete_name']" position="attributes">
+                <attribute name="attrs">{'invisible': 1}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='spouse_birthdate']" position="attributes">
+                <attribute name="attrs">{'invisible': 1}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='study_field']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='study_school']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+<!--            <xpath expr="//field[@name='pan']" position="attributes">-->
+<!--                <attribute name="invisible">1</attribute>-->
+<!--            </xpath>-->
+        </field>
+    </record>
+</odoo>

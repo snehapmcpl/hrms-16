@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_employee_rec_history_attr" model="ir.ui.view">
+        <field name="name">employee.rec.history.attr</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[@name='employment_history']/group" position="attributes">
+                <attribute name="string">Employment History</attribute>
+            </xpath>
+            <xpath expr="//field[@name='emp_history']" position="attributes">
+                <attribute name="string">Employment History</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

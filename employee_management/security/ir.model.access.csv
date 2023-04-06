@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+family_user,family,model_res_family,base.group_user,1,1,1,1
+background_user,background,model_res_background,base.group_user,1,1,1,1
+nominee_user,nominee,model_res_nominee,base.group_user,1,1,1,1
+history_user,history,model_rec_history,base.group_user,1,1,1,1
+language_user,language,model_res_language,base.group_user,1,1,1,1
+

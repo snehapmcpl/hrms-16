@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="it_returns_tax_section80c_tree" model="ir.ui.view">
+        <field name="name">tax.section80c.tree</field>
+        <field name="model">tax.section80c</field>
+        <field name="arch" type="xml">
+            <tree string="Section 80C">
+                <field name="name"/>
+<!--                <field name="amount"/>-->
+                <field name="limit_amount"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="it_returns_tax_section80c_form" model="ir.ui.view">
+        <field name="name">tax.section80c.form</field>
+        <field name="model">tax.section80c</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" required="1"/>
+<!--                        <field name="amount"/>-->
+                        <field name="limit_amount" required="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_it_returns_tax_section80c">
+        <field name="name">Section 80C</field>
+        <field name="res_model">tax.section80c</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

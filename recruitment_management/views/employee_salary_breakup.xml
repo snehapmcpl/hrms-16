@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="employee_salary_breakup_form_view" model="ir.ui.view">
+        <field name="name">employee.salary.breakup.form</field>
+        <field name="model">employee.salary.breakup</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" required="1"/>
+<!--                            <field name="email"/>-->
+                            <field name="basic_salary"/>
+                            <field name="hra"/>
+                            <field name="standard_deduction"/>
+                            <field name="leave_travel_allowance"/>
+                            <field name="special_allowance"/>
+                            <field name="food_coupon"/>
+                        </group>
+                        <group>
+                            <field name="pf_employer_contribution"/>
+                            <field name="variable_allowance"/>
+<!--                            <field name="deduction"/>-->
+                            <field name="pf_employee_contribution"/>
+                            <field name="professional_tax"/>
+                            <field name="income_tax_tds"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="employee_salary_breakup_tree_view">
+        <field name="name">employee.salary.breakup.tree</field>
+        <field name="model">employee.salary.breakup</field>
+        <field name="arch" type="xml">
+            <tree string="Employee Salary Breakup">
+                <field name="name"/>
+<!--                <field name="email"/>-->
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_employee_salary_breakup" model="ir.actions.act_window">
+        <field name="name">Employee Salary Breakup</field>
+        <field name="res_model">employee.salary.breakup</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="employee_salary_breakup_menu"
+              name="Employee Salary Breakup"
+              sequence="101"
+              parent="hr_recruitment.menu_hr_recruitment_root"
+              groups="hr_recruitment.group_hr_recruitment_manager"
+              action="action_employee_salary_breakup"/>
+</odoo>

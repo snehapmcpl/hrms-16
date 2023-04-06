@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="hr_holidays.act_hr_employee_holiday_request" model="ir.actions.server">
+        <field name="groups_id" eval="[(6, 0, [ref('hr.group_hr_user')])]"/>
+    </record>
+    <record id="hr_holidays.action_hr_holidays_by_employee_and_type_report" model="ir.actions.server">
+        <field name="groups_id" eval="[(6, 0, [ref('hr.group_hr_user')])]"/>
+    </record>
+    <record id="hr.hr_employee_print_badge" model="ir.actions.report">
+        <field name="groups_id" eval="[(6, 0, [ref('hr.group_hr_user')])]"/>
+    </record>
+</odoo>

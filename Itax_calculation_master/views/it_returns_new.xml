@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="it_returns_tree_new" model="ir.ui.view">
+        <field name="name">it.returns.tree.new</field>
+        <field name="model">it.returns</field>
+        <field name="arch" type="xml">
+            <tree string="IT Calculation">
+                <field name="employee_id"/>
+                <field name="employee_code"/>
+                <field name="pan_no"/>
+                <field name="tds_computation_month" invisible="1"/>
+                <field name="date_from" invisible="1"/>
+                <field name="date_to" invisible="1"/>
+                <field name="tax_resign_type_name"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="it_returns_form_new" model="ir.ui.view">
+        <field name="name">it.returns.form.new</field>
+        <field name="model">it.returns</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="compute_tax_sheet" type="object"
+                            string="Compute Sheet" groups="Itax_calculation_master.group_admin"
+                            data-hotkey="s" class="btn-primary" attrs="{'invisible':[('state','=', 'done')]}"/>
+
+                    <button name="create_older_lines" type="object"
+                            string="Create Older Records" groups="Itax_calculation_master.group_admin"
+                            data-hotkey="o" class="btn-primary" attrs="{'invisible':[('state','=', 'done')]}"/>
+                     <button name="action_confirm" type="object"
+                            string="Confirm" groups="Itax_calculation_master.group_admin"
+                            data-hotkey="o" class="btn-primary" attrs="{'invisible':[('state','=', 'done')]}"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box" groups="Itax_calculation_master.group_admin">
+                            <button name="tds_action" string="TDS" type="object"
+                                    attrs="{'invisible':[('employee_tds_count','=', 0)]}" icon="fa-scissors">
+                                    ( <field name="employee_tds_count" widget="statinfo"/>)
+                            </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="employee_id" required="1" readonly="1"/>
+                            <field name="pan_no" readonly="1"/>
+                            <field name="birthday" readonly="1"/>
+
+                            <field name="tax_resign_type_name" invisible="1"/>
+                            <field name="employee_tds_count" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="employee_code" readonly="1"/>
+                            <field name="age" readonly="1"/>
+                            <field name="tax_resign_type" readonly="1"/>
+                            <field name="tds_computation_month" readonly="1" invisible="1"/>
+                            <field name="date_from" required="1" readonly="1" invisible="1"/>
+                            <field name="date_to" required="1" readonly="1" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Gross Annual Income" name="gross_annual_income" groups="Itax_calculation_master.group_admin">
+                            <field name="gross_line_ids" attrs="{'readonly':[('state','=', 'done')]}">
+                                <tree editable="bottom">
+                                    <field name="gross_annual_income"/>
+                                    <field name="amount"/>
+                                    <field name="it_return_gross" invisible="1"/>
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <label for="gross_total" string="Gross Total" style="font-size: 18px;"/>
+                                <field name="gross_total" style="font-size: 18px;" nolabel="1" />
+                            </group>
+                        </page>
+                        <page string="Section 10(Yearly)" name="section_10" attrs="{'invisible': [('tax_resign_type_name', '!=', 'Old Regime')]}">
+                            <field name="section_10_line_ids" attrs="{'readonly':[('state','=', 'done')]}">
+                                <tree editable="bottom">
+                                    <field name="section_10"/>
+                                    <field name="amount"/>
+                                    <field name="document" filename="file_name" widget="binary"/>
+                                    <field name="file_name" invisible="1"/>
+                                    <field name="it_return_section10" invisible="1"/>
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <label for="section_10_total" string="Total" style="font-size: 18px;"/>
+                                <field name="section_10_total" style="font-size: 18px;" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Section 16(Yearly)" name="section_16" groups="Itax_calculation_master.group_admin" attrs="{'invisible': [('tax_resign_type_name', '!=', 'Old Regime')]}">
+                            <field name="section_16_line_ids" attrs="{'readonly':[('state','=', 'done')]}">
+                                <tree editable="bottom">
+                                    <field name="section_16"/>
+                                    <field name="amount"/>
+                                    <field name="it_return_section16" invisible="1"/>
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <label for="section_16_total" string="Total" style="font-size: 18px;"/>
+                                <field name="section_16_total" style="font-size: 18px;" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Income From other sources(Yearly)" name="other_income_sources" >
+                            <field name="other_income_ids" attrs="{'readonly':[('state','=', 'done')]}">
+                                <tree editable="bottom">
+                                    <field name="other_incomes"/>
+                                    <field name="amount"/>
+                                    <field name="it_return_other_income" invisible="1"/>
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <label for="other_income_total" string="Total" style="font-size: 18px;"/>
+                                <field name="other_income_total" style="font-size: 18px;" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Section 24(Yearly)" name="section_24" attrs="{'invisible': [('tax_resign_type_name', '!=', 'Old Regime')]}">
+                            <field name="section_24_line_ids" attrs="{'readonly':[('state','=', 'done')]}">
+                                <tree editable="bottom">
+                                    <field name="section_24"/>
+                                    <field name="amount"/>
+                                    <field name="max_limit"/>
+                                    <field name="document" filename="file_name" widget="binary"/>
+                                    <field name="file_name" invisible="1"/>
+                                    <field name="it_return_section24" invisible="1"/>
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <label for="section_24_total" string="Total" style="font-size: 18px;"/>
+                                <field name="section_24_total" style="font-size: 18px;" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Section 80C(Yearly)" name="section_80c" attrs="{'invisible': [('tax_resign_type_name', '!=', 'Old Regime')]}">
+                            <field name="section_80c_line_ids" attrs="{'readonly':[('state','=', 'done')]}">
+                                <tree editable="bottom">
+                                    <field name="section_80c"/>
+                                    <field name="amount"/>
+                                    <field name="document" filename="file_name" widget="binary"/>
+                                    <field name="file_name" invisible="1"/>
+                                    <field name="it_return_section80c" invisible="1"/>
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <label for="section_80c_total" string="Total" style="font-size: 18px;"/>
+                                <field name="section_80c_total" style="font-size: 18px;" nolabel="1"/>
+                                <label for="section_80c_max_limit" string="Max Limit" style="font-size: 15px;"/>
+                                <field name="section_80c_max_limit" style="font-size: 15px;" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Chapter VI A(Yearly)" name="chapter_vi_a">
+                            <field name="chapter6_line_ids" attrs="{'readonly':[('state','=', 'done')]}">
+                                <tree editable="bottom">
+                                    <field name="chapter6"/>
+                                    <field name="amount"/>
+                                    <field name="max_limit"/>
+                                    <field name="document" filename="file_name" widget="binary"/>
+                                    <field name="file_name" invisible="1"/>
+                                    <field name="it_return_chapter6" invisible="1"/>
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <label for="chapter6_total" string="Total" style="font-size: 18px;"/>
+                                <field name="chapter6_total" style="font-size: 18px;" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Less: Relief under section 89(Yearly)" name="section_89" groups="Itax_calculation_master.group_admin" attrs="{'invisible': [('tax_resign_type_name', '!=', 'Old Regime')]}">
+                            <group>
+                                <field name="relief_under_section_89" attrs="{'readonly':[('state','=', 'done')]}"/>
+                            </group>
+                        </page>
+                        <page string="Computed Sheet" name="computed_sheet" groups="Itax_calculation_master.group_admin">
+                            <field name="computed_line_ids" widget="one2many_list" attrs="{'readonly':[('state','=', 'done')]}">
+                                <tree editable="bottom" decoration-warning="color == 'brown'"
+                                      decoration-info="color == 'blue'" decoration-bf="color == 'bold'">
+                                    <field name="name"/>
+                                    <field name="amount"/>
+                                    <field name="amount_total"/>
+                                    <field name="color" invisible="1"/>
+                                    <field name="it_returns_computed" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+<!--    <record model="ir.actions.act_window" id="action_it_returns_new">-->
+<!--        <field name="name">IT Calculationss</field>-->
+<!--        <field name="res_model">it.returns</field>-->
+<!--        <field name="view_mode">tree,form</field>-->
+<!--        <field name="view_id" ref="it_returns_tree_new"/>-->
+<!--    </record>-->
+
+
+</odoo>

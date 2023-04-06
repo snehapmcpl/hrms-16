@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <template id="report_relieving_letter">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                        <div class="page">
+                            <style>
+                                table {
+                                padding-left: 5px;
+                                font-size: 18px;
+                                font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+                            }
+                            </style>
+                            <table>
+                            <tr>
+                                <td style="text-align: right; line-height: normal; padding-right: 0%;"
+                                    colspan="2">
+                                    <span>
+                                        <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)"
+                                             width="25%;" alt="Logo"/>
+                                    </span>
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 25%;text-align: right;" colspan="2">
+                                    <b style="font-size: 13px;padding-bottom:5px;">CIN:
+<!--                                        <span t-esc="o.company_id.cin_emp"/>-->
+                                    </b>
+                                    <br/>
+                                    <b style="font-size: 13px;padding-bottom:5px;">UAN No:
+<!--                                        <span t-esc="o.company_id.uan_number"/>-->
+                                    </b>
+                                    <br/>
+                                    <b style="font-size: 13px;">Startup:
+<!--                                        <span t-esc="o.company_id.startup_emp"/>-->
+                                    </b>
+                                </td>
+                            </tr>
+                            <tr style="width: 100%;">
+                            </tr>
+                            <tr>
+                                 <td style="text-align: left; font-size: 20px">
+                                    <b><u>Ref:</u>
+                                        <t t-esc="o.relieving_reference"/>
+                                    </b>
+                                    <br/>
+                                    Date:
+                                        <span style="font-size: 18px"  t-esc="datetime.datetime.now().strftime('%d-%b-%Y')"/>
+                                </td>
+                                <td style="text-align: right;">
+                                    <b>
+                                        <span style="font-size: 18px;padding-bottom:2px;" t-esc="o.company_id.name"/>
+                                    </b>
+                                    <br/>
+                                        <t  style="font-size: 13px;padding-bottom:2px;" t-esc="o.company_id.street"/>,<t t-esc="o.company_id.street2"/>,
+                                        <t t-esc="o.company_id.city"/>
+                                        -
+                                        <t t-esc="o.company_id.zip"/>
+                                        <br/>
+                                        <t style="font-size: 13px;padding-bottom:2px;" t-esc="o.company_id.state_id.name"/>,
+                                        <t t-esc="o.company_id.country_id.name"/>
+                                        <br/>
+                                        Phone:
+                                        <t style="font-size: 13px;padding-bottom:2px;" t-esc="o.company_id.phone"/>
+                                        <br/>
+                                        Email:
+                                        <t style="font-size: 13px;padding-bottom:2px;" t-esc="o.company_id.email"/>
+                                        <br/>
+                                        URL:
+                                        <t style="font-size: 13px;padding-bottom:2px;" t-esc="o.company_id.website"/>
+                                </td>
+                            </tr>
+                        </table>
+                            <div class="row">
+
+                                <div style="text-align:center; width:100%; padding-top:20px; font-size:16px;">
+                                    <u><strong>TO WHOMSOEVER IT MAY CONCERN</strong></u>
+                                </div>
+
+                                <table width="100%" cellpadding="0px" cellspacing="0px" style="padding:0px">
+                                    <tr>
+                                    </tr>
+                                    <br/>
+                                    <tr>
+                                        <td style="padding-top:20px; padding-left:3px;">
+                                            She/ He has been relieved from the services of the company effective close of working hours on <b><span t-esc ="o.emp_relieving_date.strftime('%d-%b-%Y')"/></b> .
+                                        </td>
+                                    </tr>
+                                    <br/>
+                                    <tr>
+                                        <td style="padding-top:20px; padding-left:3px;">
+                                            We wish him/her all success in his/her future professional career.
+                                        </td>
+                                    </tr>
+                                    <br/>
+                                    <tr>
+                                        <td style="padding-top:30px; padding-left:3px;">Yours sincerely,</td>
+                                    </tr>
+                                     <tr>
+                                        <td style="padding-top:30px; padding-left:3px;">For <span t-esc='o.company_id.partner_id.name'/> </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding-top:30px; padding-left:3px;">
+<!--                                            <b><t t-esc="o.company_id.director_id.name"/></b>-->
+                                            <br/>
+                                            Director
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                        </div>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

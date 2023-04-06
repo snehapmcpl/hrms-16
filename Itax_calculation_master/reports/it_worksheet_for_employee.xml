@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="it_worksheet_for_employee_template">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <t t-foreach="docs" t-as="doc">
+                        <style>
+                            table, td {
+                                border: 1px solid black;
+                                padding-left: 10px;
+                                padding-right: 8px;
+                            }
+                        </style>
+                        <div class="font-weight-bold" style="text-align: center;font-size: 18px;">
+                            <span><t t-esc="doc.employee_id.company_id.name"/></span><br/>
+                            <span>Income Tax Worksheet for FY
+                                <span t-esc="doc.employee_id.company_id.fiscal_year_start_date.strftime('%d-%b-%Y')"/>
+                                 to <span t-esc="doc.employee_id.company_id.fiscal_year_last_date.strftime('%d-%b-%Y')"/>
+                                (AY <span t-esc="doc.employee_id.company_id.fiscal_year_start_date.year + 1"/> -
+                                <span t-esc="doc.employee_id.company_id.fiscal_year_last_date.year + 1"/>)</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-6"><b>Name :</b> <span t-esc="doc.employee_id.name"/></div>
+                            <div class="col-6" style="text-align: right;"><b>PAN :</b> <span t-esc="doc.pan_no"/></div>
+                        </div>
+                        <br/>
+                        <t t-set="currency" t-value="doc.employee_id.company_id.currency_id.symbol"/>
+                        <t t-set="count" t-value="1"/>
+                        <table width="100%">
+                            <tr>
+                                <td style="font-weight: bold;text-align: center;">Particulars</td>
+                                <td style="font-weight: bold;text-align: center;width: 20%;">Amount in (<span t-esc="currency"/>)</td>
+                            </tr>
+                            <tr t-foreach="doc.computed_line_ids" t-as="lines">
+                                <t t-if="lines.color != 'bold'">
+                                    <t t-if="lines.name == 'Deduction Under Section 80C'">
+                                        <tr>
+                                            <td class="font-weight-bold" colspan="2">
+                                                <span t-esc="doc.PrintRoman(count)"/> .
+                                                <span>Less: Deduction under Chapter VI A</span>
+                                            </td>
+                                        </tr>
+                                        <t t-set="count" t-value="count + 1"/>
+                                        <tr t-foreach="doc.section_80c_line_ids" t-as="abc_lines">
+                                            <td>
+                                                <span t-esc="abc_lines.section_80c.name"/>
+                                            </td>
+                                            <td style="text-align: right;width: 15%;">
+                                                <span t-esc="'{:,.2f}'.format(abc_lines.amount)"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-weight-bold">
+                                                <span t-esc="doc.PrintRoman(count)"/> .
+                                                <span t-esc="lines.name"/>
+                                            </td>
+                                            <td class="font-weight-bold" style="text-align: right;width: 15%;">
+                                                <span t-esc="'{:,.2f}'.format(lines.amount_total)"/>
+                                            </td>
+                                        </tr>
+                                        <t t-set="count" t-value="count + 1"/>
+                                    </t>
+                                    <t t-else="">
+                                        <td><span t-esc="lines.name"/></td>
+                                        <td style="text-align: right;width: 15%;">
+                                            <span t-esc="'{:,.2f}'.format(lines.amount_total)"/>
+                                        </td>
+                                    </t>
+                                </t>
+                                <t t-else="">
+                                    <td class="font-weight-bold">
+                                        <span t-esc="doc.PrintRoman(count)"/> .
+                                        <span t-esc="lines.name"/>
+                                    </td>
+                                    <td class="font-weight-bold" style="text-align: right;width: 15%;">
+                                        <span t-esc="'{:,.2f}'.format(lines.amount_total)"/>
+                                    </td>
+                                    <t t-set="count" t-value="count + 1"/>
+                                </t>
+                            </tr>
+                        </table>
+                        <p style="page-break-after:always"/>
+                        <table width="100%">
+                            <t t-set="TDS_payable" t-value="doc.report_TDS_payable()"/>
+                            <t t-set="recovered_so_fat" t-value="doc.report_recovered_so_far()"/>
+                            <t t-set="recovery_for_the_month" t-value="doc.report_recovery_for_the_month()"/>
+
+                            <tr><td colspan="6"><span style="font-weight: bold;">TDS Payable &amp; recovery details (Month:  <t t-esc="doc.report_month()"/> )</span></td></tr>
+                            <tr>
+                                <td colspan="2"><span style="font-weight: bold;">Total TDS payable : </span></td>
+                                <td colspan="2"><span style="font-weight: bold;">Total TDS recovered so far : </span></td>
+                                <td colspan="2"><span style="font-weight: bold;">TDS Recovery for the month : </span></td>
+                            </tr>
+                            <tr>
+                                <td><span style="font-weight: bold;">Income Tax</span></td>
+                                <td style="text-align: right;"><t t-esc="'{:,.2f}'.format(TDS_payable.get('i_tax'))"/></td>
+                                <td><span style="font-weight: bold;">Income Tax</span></td>
+                                <td style="text-align: right;"><t t-esc="'{:,.2f}'.format(recovered_so_fat.get('i_tax'))"/></td>
+                                <td><span style="font-weight: bold;">Income Tax</span></td>
+                                <td style="text-align: right;"><t t-esc="'{:,.2f}'.format(recovery_for_the_month.get('i_tax'))"/></td>
+                            </tr>
+                            <tr>
+                                <td><span style="font-weight: bold;">Surcharge</span></td>
+                                <td style="text-align: right;"><t t-esc="'{:,.2f}'.format(TDS_payable.get('surcharge'))"/></td>
+                                <td><span style="font-weight: bold;">Surcharge</span></td>
+                                <td style="text-align: right;"><t t-esc="'{:,.2f}'.format(recovered_so_fat.get('surcharge'))"/></td>
+                                <td><span style="font-weight: bold;">Surcharge</span></td>
+                                <td style="text-align: right;"><t t-esc="'{:,.2f}'.format(recovery_for_the_month.get('surcharge'))"/></td>
+                            </tr>
+                            <tr>
+                                <td><span style="font-weight: bold;">Cess</span></td>
+                                <td style="text-align: right;"><t t-esc="'{:,.2f}'.format(TDS_payable.get('cess'))"/></td>
+                                <td><span style="font-weight: bold;">Cess</span></td>
+                                <td style="text-align: right;"><t t-esc="'{:,.2f}'.format(recovered_so_fat.get('cess'))"/></td>
+                                <td><span style="font-weight: bold;">Cess</span></td>
+                                <td style="text-align: right;"><t t-esc="'{:,.2f}'.format(recovery_for_the_month.get('cess'))"/></td>
+                            </tr>
+                        </table>
+                        <table width="100%">
+                            <tr><td colspan="2"><span style="font-weight: bold;">Balance payable Rs.(<t t-esc="doc.report_balance_payable()"/>)in <t t-esc="doc.report_get_months()"/> Installments :</span></td></tr>
+                            <tr>
+                                <td><span style="font-weight: bold;">Income Tax</span></td>
+                                <td style="text-align: right;"><t t-esc="'{:,.2f}'.format(recovery_for_the_month.get('i_tax'))"/></td>
+                            </tr>
+                            <tr>
+                                <td><span style="font-weight: bold;">Surcharge</span></td>
+                                <td style="text-align: right;"><t t-esc="'{:,.2f}'.format(recovery_for_the_month.get('surcharge'))"/></td>
+                            </tr>
+                            <tr>
+                                <td><span style="font-weight: bold;">Cess</span></td>
+                                <td style="text-align: right;"><t t-esc="'{:,.2f}'.format(recovery_for_the_month.get('cess'))"/></td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <br/>
+                        <table width="100%" t-if="doc.actual_hra_received">
+                            <tr><td colspan="2"><b>HRA Exemption calculation:</b></td></tr>
+                            <tr>
+                                <td colspan="2">
+                                    Date From :
+                                    <b><span t-esc="doc.employee_id.company_id.fiscal_year_start_date.strftime('%d-%b-%Y')"/></b>
+                                 to <b><span t-esc="doc.employee_id.company_id.fiscal_year_last_date.strftime('%d-%b-%Y')"/></b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Total Rent Paid by the Employee </td>
+                                <td style="text-align: right;">
+                                    <span t-esc="'{:,.2f}'.format(doc.employee_id.rent_paid * 12)"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Salary - 40% of (Basic + DA) </td>
+                                <td style="text-align: right;">
+                                    <span t-esc="'{:,.2f}'.format(doc.amount_from_basic)"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Rent Paid in excess of 10% of Salary </td>
+                                <td style="text-align: right;">
+                                    <span t-esc="'{:,.2f}'.format(doc.rent_paid)"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Actual HRA Received </td>
+                                <td style="text-align: right;">
+                                    <span t-esc="'{:,.2f}'.format(doc.actual_hra_received)"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>HRA Exemption (Least of the three)</b></td>
+                                <td style="text-align: right;">
+                                    <b>
+                                        <span t-esc="'{:,.2f}'.format(min(doc.actual_hra_received, doc.amount_from_basic, doc.rent_paid))"/>
+                                    </b>
+                                </td>
+                            </tr>
+                        </table>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

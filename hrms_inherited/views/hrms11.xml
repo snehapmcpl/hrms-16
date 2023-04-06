@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="hr_employee_form1" model="ir.ui.view">
+        <field name="name">hr.employee.form.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="Itax_calculation_master.hr_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='spouse_name_emp']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='spouse_dob']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//span[@name='spouse_name']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='study_field']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='study_school']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_employee_form2" model="ir.ui.view">
+        <field name="name">hr.employee.search</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+<!--            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">-->
+<!--                <button name="action_offer_employee_view" class="oe_stat_button"-->
+<!--                        icon="fa-envelope-o" type="object" string="View Offer Letter">-->
+<!--                </button>-->
+
+<!--            </xpath>-->
+            <xpath expr="//field[@name='private_email']" position="attributes">
+                <attribute name="string">Email(Personal)</attribute>
+            </xpath>
+            <xpath expr="//field[@name='phone']" position="attributes">
+                <attribute name="string">Phone(Personal)</attribute>
+            </xpath>
+             <xpath expr="//field[@name='private_email']" position="before">
+                <field name="esi_number"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_leave_view_form_manager1" model="ir.ui.view">
+        <field name="name">hr.leave.view.form.manager</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_view_form_manager"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='holiday_status_id']" position="replace">
+                <div name="title" position="inside">
+                    <h1 class="d-flex flex-row justify-content-between">
+                        <field name="holiday_status_id" options="{'no_open': True}"
+                               style="font-size:15px; width: 500px;"
+                               context="{'from_manager_leave_form': True ,'employee_id': employee_id}"/>
+                        <field name="employee_company_id" invisible="1"/>
+                    </h1>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_employee_form_self_service1" model="ir.ui.view">
+        <field name="name">hr.employee.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="employee_self_service.view_employee_form_self_service"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='bank_account_id']" position="after">
+                <field name="uan_number"/>
+                <field name="aadhar_number"/>
+                <field name="employee_pan_no"/>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page/group/group/field[@name='study_field']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page/group/group/field[@name='study_school']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//div[@class='oe_chatter']" position="replace">
+            </xpath>
+            <xpath expr="//field[@name='certificate']" position="after">
+                <field name="background_emp" string="Employee Background" widget="section_and_note_one2many"
+                       mode="tree">
+                    <tree>
+                        <field name="college_name_emp" optional="show"/>
+                        <field name="certificate_level" optional="show"/>
+                        <field name="specialization_emp" optional="show"/>
+                        <field name="highest_degree" options="{'no_create_edit': True}" optional="show"/>
+                        <field name="other_skill" optional="hide"/>
+                        <field name="board" optional="hide"/>
+                        <field name="roll_no" optional="hide"/>
+                        <field name="from_month_date" optional="show"/>
+                        <field name="end_month_date" optional="show"/>
+                    </tree>
+                    <form>
+                        <group>
+                            <field name="college_name_emp"/>
+                            <field name="certificate_level"/>
+                            <field name="specialization_emp"/>
+                            <span class="o_form_label o_td_label" name="background_name">
+                                <b>Address</b>
+                            </span>
+                            <div class="o_background_format">
+                                <field name="street_background" placeholder="Street..." class="o_address_street"/>
+                                <field name="street2_background" placeholder="Street 2..."
+                                       class="o_address_street"/>
+                                <field name="city_background" placeholder="City" class="o_address_city"/>
+                                <field name="state_id_background" class="o_address_state" placeholder="State"
+                                       options="{'no_open': True, 'no_quick_create': True}"/>
+                                <field name="pincode_background" placeholder="PIN CODE" class="o_address_zip"/>
+                                <field name="country_id_background" placeholder="Country" class="o_address_country"
+                                       options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                            </div>
+                            <field name="highest_degree" options="{'no_create_edit': True}"/>
+                            <field name="other_skill"/>
+                            <field name="board"/>
+                            <field name="roll_no"/>
+                            <field name="from_month_date"/>
+                            <field name="end_month_date"/>
+                        </group>
+                    </form>
+                </field>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.menu" id="hr_contract.hr_menu_contract_history">
+        <field name="name">Employment Terms</field>
+    </record>
+
+    <record model="ir.ui.menu" id="om_hr_payroll.menu_contract_type">
+        <field name="name">Employment Term Types</field>
+    </record>
+
+    <record model="ir.ui.menu" id="om_hr_payroll.hr_menu_contract">
+        <field name="name">Employment Terms</field>
+    </record>
+
+    <record model="ir.ui.menu" id="om_hr_payroll.hr_contract_advantage_template_menu_action">
+        <field name="name">Employment Term Advantage Templates</field>
+    </record>
+
+    <record id="hr_contract_history_view_form1" model="ir.ui.view">
+        <field name="name">hr.contract.history</field>
+        <field name="model">hr.contract.history</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_history_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='hr_contract_view_form_new_action']" position="attributes">
+                <attribute name="string">New Employment</attribute>
+            </xpath>
+            <xpath expr="//page[@name='contract_history']" position="attributes">
+                <attribute name="string">Employment Term History</attribute>
+            </xpath>
+            <xpath expr="//page/field/tree/field[@name='name']" position="attributes">
+                <attribute name="string">Employment Term Name</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="hr_contract_view_form1" model="ir.ui.view">
+        <field name="name">hr.contract.form</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/div/h1/field[@name='name']" position="attributes">
+                <attribute name="placeholder">Employment Term Reference</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/group/group/field[@name='date_start']" position="attributes">
+                <attribute name="string">Employment Term Start Date</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/group/group/field[@name='date_end']" position="attributes">
+                <attribute name="string">Employment Term End Date</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/group/group/field[@name='contract_type_id']" position="attributes">
+                <attribute name="string">Employment Term Type</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page[@name='other']" position="attributes">
+                <attribute name="string">Employment Term Details</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="hr_contract_history_view_list1" model="ir.ui.view">
+        <field name="name">hr.contract.history.list</field>
+        <field name="model">hr.contract.history</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_history_view_list"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='name']" position="attributes">
+                <attribute name="string">Employment Term Name</attribute>
+            </xpath>
+            <xpath expr="//tree/field[@name='contract_count']" position="attributes">
+                <attribute name="string">Employment Terms</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_hr_payslip_form" model="ir.ui.view">
+        <field name="name">hr.payslip.form</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="om_hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/notebook/page/field/tree/field[@name='contract_id']" position="attributes">
+                <attribute name="string">Employment Term</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page/field[2]/tree/field[@name='contract_id']" position="attributes">
+                <attribute name="string">Employment Term</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page/field/form/group/field[@name='contract_id']" position="attributes">
+                <attribute name="string">Employment Term</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page/field[2]/form/group/field[@name='contract_id']" position="attributes">
+                <attribute name="string">Employment Term</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page/field/tree/field[@name='total']" position="attributes">
+                <attribute name="string">Total (₹)</attribute>
+            </xpath>
+             <xpath expr="//form/sheet/notebook/page[3]/field/tree/field[@name='total']" position="attributes">
+                <attribute name="string">Total (₹)</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page/field/tree/field[@name='amount']" position="attributes">
+                <attribute name="string">Amount (₹)</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="it_returns_form1" model="ir.ui.view">
+        <field name="name">it.returns.form</field>
+        <field name="model">it.returns</field>
+        <field name="inherit_id" ref="Itax_calculation_master.it_returns_form"/>
+        <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook/page[9]/field/tree/field[@name='amount_total']" position="attributes">
+                    <attribute name="string">Total (₹)</attribute>
+                </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_res_bank_inherit_l10n_mx_edi_bank1">
+        <field name="name">view.res.bank.inherit.l10n_mx_edi_bank</field>
+        <field name="model">res.bank</field>
+        <field name="inherit_id" ref="base.view_res_bank_form"/>
+        <field name="arch" type="xml">
+                 <xpath expr="//field[@name='bic']" position="attributes">
+                         <attribute name ="string">IFSC Code</attribute>
+                 </xpath>
+        </field>
+    </record>
+
+
+
+
+</odoo>
+
+

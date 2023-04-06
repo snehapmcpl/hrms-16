@@ -1,0 +1,10 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<odoo>-->
+<!--    <data>-->
+<!--        <record id="salary_rule_1" model="hr.payroll.structure">-->
+<!--            <field name="name">Employee Pension Scheme</field>-->
+<!--            <field name="code">EPS</field>-->
+<!--&lt;!&ndash;            <field name="category_id">Company Contribution</field>&ndash;&gt;-->
+<!--        </record>-->
+<!--    </data>-->
+<!--</odoo>-->

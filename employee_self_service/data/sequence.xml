@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ir_sequence_employee_tax_seq" model="ir.sequence">
+            <field name="name">Employee Tax Sequence</field>
+            <field name="code">hr.employee.tax</field>
+            <field name="prefix">SSP/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

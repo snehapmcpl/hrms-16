@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="paperformat_confirmation_letter" model="report.paperformat">
+        <field name="name">confirmation letter</field>
+        <field name="default" eval="False"/>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">10</field>
+        <field name="margin_bottom">5</field>
+        <field name="margin_left">12</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">0</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="report_confirmation_menu" model="ir.actions.report">
+        <field name="name">Confirmation Letter</field>
+        <field name="model">hr.employee</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">recruitment_management.conformation_letter_template</field>
+        <field name="report_file">recruitment_management.conformation_letter_template</field>
+        <field name="paperformat_id" ref="recruitment_management.paperformat_confirmation_letter"/>
+        <field name="binding_model_id" ref="model_hr_employee"/>
+        <field name="binding_type">report</field>
+        <field name="groups_id" eval="[(6, 0, [ref('hr.group_hr_user')])]"/>
+    </record>
+</odoo>

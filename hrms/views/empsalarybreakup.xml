@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="emp_salary_breakup_inherit" model="ir.ui.view">
+        <field name="name">emp_salary_breakup_inherit</field>
+        <field name="model">employee.salary.breakup</field>
+        <field name="inherit_id" ref="recruitment_management.employee_salary_breakup_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group/group/field[@name='name']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/group/group/field[@name='name']" position="after">
+                <field name="name"/>
+                <field name="proposed_salary"/>
+                <field name="salary_structure"/>
+                <field name="mbo1" string="Variable pay (%)"/>
+<!--                <field name="employee_name"/>-->
+<!--                <field name="employee_salary"/>-->
+            </xpath>
+            <xpath expr="//form/sheet/group/group/field[@name='basic_salary']" position="attributes">
+                <attribute name="string">Basic Salary (p.a)</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/group/group/field[@name='standard_deduction']" position="attributes">
+                <attribute name="string">Standard Deduction (p.a)</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/group/group/field[@name='leave_travel_allowance']" position="attributes">
+                <attribute name="string">Leave Travel Allowance (p.a)</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/group/group/field[@name='special_allowance']" position="attributes">
+                <attribute name="string">Special Allowance (p.a)</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/group/group/field[@name='pf_employer_contribution']" position="attributes">
+                <attribute name="string">PF Employer Contribution (p.a)</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/group/group/field[@name='hra']" position="attributes">
+                <attribute name="string">House Rent Allowance (p.a)</attribute>
+            </xpath>
+             <xpath expr="//form/sheet/group/group/field[@name='food_coupon']" position="attributes">
+                <attribute name="string">Food Coupon Allowance (p.a)</attribute>
+            </xpath>
+             <xpath expr="//form/sheet/group/group/field[@name='variable_allowance']" position="attributes">
+                <attribute name="string">Variable Allowance (p.a)</attribute>
+            </xpath>
+        </field>
+    </record>
+    <template id="offer_letter_template_inherit" inherit_id="recruitment_management.offer_letter_template"
+              name="Offer Letter Template Inherit">
+        <xpath expr="//t/t/div/t/table/table/tr/td[2]/b" position="replace">
+            <b>
+                CTC (₹) (p.a)
+            </b>
+        </xpath>
+        <xpath expr="//t/t/div/t/table/table/tr/td[3]/b" position="replace">
+            <b>
+                Gross CTC (₹) (p.m)
+            </b>
+        </xpath>
+    </template>
+</odoo>

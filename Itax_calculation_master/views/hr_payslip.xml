@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_hr_payslip_form" model="ir.ui.view">
+        <field name="name">hr.payslip.form</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="om_hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="master_salary_details" string="Master Salary Details">
+                    <group>
+                        <field name="basic_salary"/>
+                        <field name="hra"/>
+                        <field name="standard_deduction"/>
+                        <field name="lta"/>
+                        <field name="special_allowance"/>
+                        <field name="variable_allowance"/>
+                        <field name="pf_amount"/>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page name="other_info" string="Other Info">
+                    <group>
+                        <group string="Deductions (₹)">
+                            <field name="food_coupon_ded"/>
+                            <field name="income_tax"/>
+                            <field name="surcharge"/>
+                            <field name="cess"/>
+                            <field name="hr_deduction"/>
+                            <field name="other_deductions"/>
+                            <field name="income_tax_total" invisible="1"/>
+                        </group>
+                        <group string="Allowances (₹)">
+                            <field name="food_coupon_alw"/>
+                            <field name="onsite_allowance"/>
+                            <field name="shift_allowance"/>
+                            <field name="other_allowance"/>
+                        </group>
+                        <group string="Days">
+                            <field name="total_days"/>
+                            <field name="paid_days"/>
+                            <field name="salary_days" invisible="1"/>
+                            <field name="leave_days"/>
+                            <field name="unpaid_days"/>
+                            <field name="weekend_days"/>
+                            <field name="public_leave_days"/>
+                            <field name="present_days"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//sheet/notebook/page[2]/field[@name='line_ids']/tree/field[@name='quantity']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath expr="//sheet/notebook/page[2]/field[@name='line_ids']/tree/field[@name='rate']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath expr="//sheet/notebook/page[2]/field[@name='line_ids']/tree/field[@name='amount']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath expr="//sheet/notebook/page[2]/field[@name='line_ids']/tree/field[@name='salary_rule_id']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

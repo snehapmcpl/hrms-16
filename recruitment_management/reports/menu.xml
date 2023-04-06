@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="paperformat_offer_letter" model="report.paperformat">
+        <field name="name">employee report</field>
+        <field name="default" eval="False"/>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">10</field>
+        <field name="margin_bottom">10</field>
+        <field name="margin_left">12</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">0</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="report_offer_letter_menu" model="ir.actions.report">
+        <field name="name">Offer Letter</field>
+        <field name="model">hr.applicant</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">recruitment_management.offer_letter_template</field>
+        <field name="report_file">recruitment_management.offer_letter_template</field>
+        <field name="print_report_name">('Offer letter_%s' %(object.partner_name)+'_' +(object.job_id.name)+'_' +time.strftime('%Y-%m-%d'))</field>
+        <field name="paperformat_id" ref="recruitment_management.paperformat_offer_letter"/>
+        <field name="binding_model_id" ref="model_hr_applicant"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="paperformat_appointment_letter" model="report.paperformat">
+        <field name="name">employee report</field>
+        <field name="default" eval="False"/>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">10</field>
+        <field name="margin_bottom">10</field>
+        <field name="margin_left">12</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">0</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="report_appointment_letter_menu" model="ir.actions.report">
+        <field name="name">Appointment Letter</field>
+        <field name="model">hr.employee</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">recruitment_management.appointment_letter_template</field>
+        <field name="report_file">recruitment_management.appointment_letter_template</field>
+        <field name="paperformat_id" ref="recruitment_management.paperformat_appointment_letter"/>
+        <field name="binding_model_id" ref="model_hr_employee"/>
+<!--        <field name="groups_id" eval="[(6, 0, [ref('hr.group_hr_user')])]"/>-->
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
+

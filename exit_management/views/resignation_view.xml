@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="employee_resignation_tree" model="ir.ui.view">
+            <field name="name">hr.resignation.tree</field>
+            <field name="model">hr.resignation</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Employee Resignation">
+                    <field name="employee_id"/>
+                    <field name="resignation_type" string="Type"/>
+                    <field name="emp_relieving_date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <record id="employee_resignation_form" model="ir.ui.view">
+            <field name="name">hr.resignation.form</field>
+            <field name="model">hr.resignation</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <form string="Employee Resignation">
+                    <header>
+                        <button string="Compute Final Settlement" type="object" name="compute_sheet" class="oe_highlight" states="accepted,processing" help="Recompute the payslip lines only, not the worked days / input lines"/>
+                        <button string="Accept" name="action_accept" type="object" states="discussion" class="oe_highlight" />
+                        <button string="Reject" name="action_reject" type="object" states="discussion" class="oe_highlight" />
+                        <button string="Approve" name="action_approval" type="object" states="processing" class="oe_highlight" />
+                        <button string="Set to Processing" name="action_slip_processing" type="object" states="done" class="oe_highlight" />
+                        <field name="state" widget="statusbar" statusbar_visible="discussion,rejected,accepted,approval,feedback,processing,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title" name="title">
+                            <h1><field name="employee_id" placeholder="Employee"/></h1>
+                            <h2><field name="number" attrs="{'invisible': [('state', '=', 'rejected')]}"/></h2>
+                        </div>
+                        <group>
+                            <group string="Employee Details - Resignation Details">
+                                <field name="employee_id" required="1" attrs="{'readonly': [('state','in',('accepted','approval','feedback','processing','done'))]}"/>
+                                <field name="date_of_joining"/>
+                                <field name="company_id"/>
+                                <field name="check" invisible="1"/>
+                                <field name="resignation_type" string="Type" groups="hr.group_hr_user" attrs="{'readonly': [('state','in',('accepted','approval','feedback','processing','done'))]}"/>
+                                <field name="reason" attrs="{'readonly': [('state','in',('accepted','approval','feedback','processing','done'))]}"/>
+                                <field name="manager_feedback" attrs="{'readonly': [('state','in',('accepted','approval','feedback','processing','done'))]}"/>
+                                <field name="exit_interview_feedback" attrs="{'readonly': [('state','in',('accepted','approval','feedback','processing','done'))]}"/>
+                                <field name="struct_id" attrs="{'readonly': [('state','in',('accepted','approval','feedback','processing','done'))]}"/>
+                                <field name="relieving_reference"/>
+                                <field name="experience_reference"/>
+                            </group>
+                            <group string="Dates">
+                                <field name="is_resigned" invisible="1"/>
+                                <field name="is_terminated" invisible="1"/>
+                                <field name="is_retired" invisible="1"/>
+                                <field name="is_absconded" invisible="1"/>
+                                <field name="is_others" invisible="1"/>
+                                <field name="date_of_resignation" attrs="{'invisible':[('is_resigned', '=', False)]}"/>
+                                <field name="termination_date" attrs="{'invisible':[('is_terminated', '=', False)]}"/>
+                                <field name="date_of_absconding" attrs="{'invisible':[('is_absconded', '=', False)]}"/>
+                                <field name="retirement_date" attrs="{'invisible':[('is_retired', '=', False)]}"/>
+                                <field name="date_of_death" attrs="{'invisible':[('is_others', '=', False)]}"/>
+                                <field name="notice_period" attrs="{'invisible':[('is_resigned', '=', False)]}"/>
+                                <field name="waive_off" attrs="{'invisible':[('is_resigned', '=', False)]}"/>
+                                <field name="date_of_acceptance" attrs="{'invisible':[('is_resigned', '=', False)]}"/>
+                                <field name="date_of_relieving" readonly="True" force_save = "1" attrs="{'invisible':[('is_resigned', '=', False)]}"/>
+                                <field name="date_from" invisible="1"/>
+                                <field name="emp_relieving_date" force_save = "1"/>
+                                <field name="notice_shortfall" force_save = "1" attrs="{'invisible':[('is_resigned', '=', False)]}"/>
+                                <field name="pending_salary_days" force_save = "1" invisible="0"/>
+                                <field name="company_notice_days" force_save = "1" attrs="{'invisible':[('is_terminated', '=', False)]}"/>
+                                <field name="service_years"/>
+                                <field name="years"/>
+                                <field name="calculate_gratuity" attrs="{'invisible':[('check', '=', False)]}"/>
+                                <field name="date_of_settlement"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Salary Computation" name="salary_computation">
+                                <field name="line_ids" colspan="4" nolabel="1">
+                                    <tree string="Salary Structure" editable="bottom" decoration-info="total == 0" create="0" delete="0">
+                                        <field name="name"/>
+                                        <field name="code" readonly="1" force_save="1" optional="hide"/>
+                                        <field name="category_id" readonly="1" force_save="1"/>
+                                        <field name="sequence" invisible="1" readonly="1" force_save="1"/>
+                                        <field name="quantity" readonly="1" force_save="1" invisible="1"/>
+                                        <field name="rate" readonly="1" force_save="1" invisible="1"/>
+                                        <field name="salary_rule_id" groups="base.group_no_one" readonly="1" force_save="1"/>
+                                        <field name="amount" readonly="1" string="Amount(₹)" force_save="1"/>
+                                        <field name="total" readonly="1" force_save="1" string="Total(₹)"/>
+                                        <field name="currency_id" invisible="1"/>
+                                    </tree>
+                                    <form string="Payslip Line">
+                                        <group col="4">
+                                            <field name="name"/>
+                                            <field name="code"/>
+                                            <field name="category_id"/>
+                                            <field name="sequence"/>
+                                            <field name="quantity"/>
+                                            <field name="rate"/>
+                                            <field name="amount"/>
+                                            <field name="total"/>
+                                            <field name="salary_rule_id"/>
+                                            <field name="currency_id" invisible="1"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Other Info" name="other_info">
+                                <group>
+                                    <group string="Deductions (₹)">
+                                        <field name="food_coupon_ded"/>
+                                        <field name="income_tax"/>
+                                        <field name="hr_deduction"/>
+                                        <field name="other_deductions"/>
+                                    </group>
+                                    <group string="Allowances (₹)">
+                                        <field name="food_coupon_alw"/>
+                                        <field name="onsite_allowance"/>
+                                        <field name="shift_allowance"/>
+                                        <field name="other_allowance"/>
+                                    </group>
+                                    <group string="Days">
+                                        <field name="total_days"/>
+                                        <field name="paid_days"/>
+                                        <field name="salary_days" invisible="0"/>
+                                        <field name="leave_days"/>
+                                        <field name="unpaid_days"/>
+                                        <field name="weekend_days"/>
+                                        <field name="public_leave_days"/>
+                                        <field name="present_days"/>
+                                    </group>
+                                    <group string="Leave Balance">
+                                        <field name="leave_balance"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page name ="master_salary_details" string="Master Salary Details">
+                                <group>
+                                    <group>
+                                        <field name="basic_salary"/>
+                                        <field name="hra"/>
+                                        <field name="standard_deduction"/>
+                                        <field name="lta"/>
+                                        <field name="special_allowance"/>
+                                        <field name="variable_allowance"/>
+                                        <field name="pf_amount"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page name ="pending_salary_details" string="Pending Salary Details">
+                            <group>
+                                <group>
+                                    <field name="month_1"/>
+                                    <field name="month_2"/>
+                                    <field name="month_3"/>
+                                    <field name="month_name_1"/>
+                                    <field name="month_name_2"/>
+                                    <field name="month_name_3"/>
+                                </group>
+                            </group>
+                        </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="view_employee_resignation">
+            <field name="name">Employee Resignation</field>
+            <field name="res_model">hr.resignation</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Employee Resignation Form
+                </p>
+            </field>
+        </record>
+           <menuitem id="employee_resignation"
+                     name="Exit Management"
+                     sequence="21"
+                     web_icon="exit_management,static/description/icon.png"
+                     groups="exit_management.group_exit_management_admin"/>
+        <menuitem id="employee_resignation_request" parent="employee_resignation" name="Resignation Request"
+                  action="view_employee_resignation" sequence="4"/>
+    </data>
+</odoo>

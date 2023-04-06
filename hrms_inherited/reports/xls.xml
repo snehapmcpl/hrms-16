@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="income_tax_xlx" model="ir.actions.report">
+        <field name="name">Income Tax Excel</field>
+        <field name="model">it.returns</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">hrms_inherited.report_it_xls</field>
+        <field name="report_file">hrms_inherited.report_it_xls</field>
+        <field name="binding_type">report</field>
+    </record>
+
+
+    <menuitem id="income_tax_excel_submenu"
+              name="Consolidated IT Worksheet"
+              parent="Itax_calculation_master.menu_it_returns_reporting"
+              action="action_income_tax_Wizard"
+              sequence="10"/>
+
+
+</odoo>
