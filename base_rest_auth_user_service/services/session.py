@@ -219,6 +219,9 @@ class SessionAuthenticationService(Component):
     _usage = "auth"
     _collection = "session.rest.services"
 
+    def db_monodb(self):
+        pass
+
     @restapi.method([(["/login"], "POST")], auth="public")
     def authenticate(self):
         params = request.params
@@ -236,11 +239,11 @@ class SessionAuthenticationService(Component):
         }
         return result
 
+    # def db_monodb(self):
+    #     pass
+
     @restapi.method([(["/logout"], "POST")], auth="user")
     def logout(self):
 
         request.session.logout(keep_db=True)
         return {"message": "Successful logout"}
-
-
-

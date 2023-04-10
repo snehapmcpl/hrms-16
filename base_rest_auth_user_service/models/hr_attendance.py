@@ -10,3 +10,4 @@ class HrAttendance(models.Model):
     latitude_2 = fields.Char(string="Latitude 2")
     longitude_2 = fields.Char(string="Longitude 2")
     location_2 = fields.Char(string="Location 2")
+
