@@ -5,7 +5,7 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/group/field[@name='certificate']" position="after">
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/field[@name='certificate']" position="after">
                 <field name="background_emp" string="Employee Background" widget="section_and_note_one2many" mode="tree">
                     <tree>
                         <field name="college_name_emp" optional="show"/>
