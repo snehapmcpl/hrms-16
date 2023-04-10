@@ -67,7 +67,7 @@
                 </page>
             </xpath>
 
-            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/group/field[@name='address_home_id']" position="after">
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/field[@name='address_home_id']" position="after">
                 <field name="self_record" invisible="1"/>
                 <span class="o_form_label o_td_label" name="address_name">
                     <b>Present Address</b>
