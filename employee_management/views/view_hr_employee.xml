@@ -5,7 +5,7 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/field[@name='address_home_id']" position="after">
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/group/field[@name='address_home_id']" position="after">
                 <field name="self_record" invisible="1"/>
                 <span class="o_form_label o_td_label" name="address_name">
                     <b>Present Address</b>
@@ -58,7 +58,7 @@
                 </div>
                 <field name="bank_account_id"/>
             </xpath>
-            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group[@name='has_work_permit']" position="after">
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/group[@name='has_work_permit']" position="after">
                 <group name="emergency_contact" string="Person To Be Contacted In Case Of Emergency">
                     <field name="name_emergency"/>
                     <span class="o_form_label o_td_label" name="address_name">

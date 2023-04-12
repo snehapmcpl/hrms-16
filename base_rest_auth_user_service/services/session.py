@@ -3,7 +3,6 @@ import datetime
 from odoo import fields
 from odoo.http import db_monodb, request, root
 from odoo.service import security
-
 from odoo.addons.base_rest import restapi
 from odoo.addons.component.core import Component
 import logging
@@ -219,8 +218,6 @@ class SessionAuthenticationService(Component):
     _usage = "auth"
     _collection = "session.rest.services"
 
-    def db_monodb(self):
-        pass
 
     @restapi.method([(["/login"], "POST")], auth="public")
     def authenticate(self):
@@ -239,8 +236,6 @@ class SessionAuthenticationService(Component):
         }
         return result
 
-    # def db_monodb(self):
-    #     pass
 
     @restapi.method([(["/logout"], "POST")], auth="user")
     def logout(self):
