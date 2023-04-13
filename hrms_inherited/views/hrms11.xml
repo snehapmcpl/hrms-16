@@ -28,24 +28,43 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
-<!--            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">-->
-<!--                <button name="action_offer_employee_view" class="oe_stat_button"-->
-<!--                        icon="fa-envelope-o" type="object" string="View Offer Letter">-->
-<!--                </button>-->
+            <!--            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">-->
+            <!--                <button name="action_offer_employee_view" class="oe_stat_button"-->
+            <!--                        icon="fa-envelope-o" type="object" string="View Offer Letter">-->
+            <!--                </button>-->
 
-<!--            </xpath>-->
+            <!--            </xpath>-->
             <xpath expr="//field[@name='private_email']" position="attributes">
                 <attribute name="string">Email(Personal)</attribute>
             </xpath>
             <xpath expr="//field[@name='phone']" position="attributes">
                 <attribute name="string">Phone(Personal)</attribute>
             </xpath>
-             <xpath expr="//field[@name='private_email']" position="before">
+            <xpath expr="//field[@name='private_email']" position="before">
+                <!--                <div>-->
                 <field name="esi_number"/>
+                <!--                </div>>-->
             </xpath>
+            <!--            <xpath expr="//field[@name='esi_number']" position="after">-->
+            <!--                <group>-->
+            <!--                                            <field name="private_email"/>-->
+
+            <!--                </group>-->
+            <!--            </xpath>-->
         </field>
     </record>
-
+    <!--    <record id="hr_employee_form3" model="ir.ui.view">-->
+    <!--        <field name="name">hr.employee.search.fields</field>-->
+    <!--        <field name="model">hr.employee</field>-->
+    <!--        <field name="inherit_id" ref="Itax_calculation_master.hr_employee_form"/>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--             <xpath expr="//div/field[@name='bank_account_id']" position="before">-->
+    <!--                <div>-->
+    <!--                    <field name="uan_number"/>-->
+    <!--                </div>-->
+    <!--            </xpath>-->
+    <!--        </field>-->
+    <!--    </record>-->
     <record id="hr_leave_view_form_manager1" model="ir.ui.view">
         <field name="name">hr.leave.view.form.manager</field>
         <field name="model">hr.leave</field>
@@ -215,13 +234,14 @@
             <xpath expr="//form/sheet/notebook/page/field/form/group/field[@name='contract_id']" position="attributes">
                 <attribute name="string">Employment Term</attribute>
             </xpath>
-            <xpath expr="//form/sheet/notebook/page/field[2]/form/group/field[@name='contract_id']" position="attributes">
+            <xpath expr="//form/sheet/notebook/page/field[2]/form/group/field[@name='contract_id']"
+                   position="attributes">
                 <attribute name="string">Employment Term</attribute>
             </xpath>
             <xpath expr="//form/sheet/notebook/page/field/tree/field[@name='total']" position="attributes">
                 <attribute name="string">Total (₹)</attribute>
             </xpath>
-             <xpath expr="//form/sheet/notebook/page[3]/field/tree/field[@name='total']" position="attributes">
+            <xpath expr="//form/sheet/notebook/page[3]/field/tree/field[@name='total']" position="attributes">
                 <attribute name="string">Total (₹)</attribute>
             </xpath>
             <xpath expr="//form/sheet/notebook/page/field/tree/field[@name='amount']" position="attributes">
@@ -235,9 +255,9 @@
         <field name="model">it.returns</field>
         <field name="inherit_id" ref="Itax_calculation_master.it_returns_form"/>
         <field name="arch" type="xml">
-                <xpath expr="//form/sheet/notebook/page[9]/field/tree/field[@name='amount_total']" position="attributes">
-                    <attribute name="string">Total (₹)</attribute>
-                </xpath>
+            <xpath expr="//form/sheet/notebook/page[9]/field/tree/field[@name='amount_total']" position="attributes">
+                <attribute name="string">Total (₹)</attribute>
+            </xpath>
         </field>
     </record>
 
@@ -246,13 +266,31 @@
         <field name="model">res.bank</field>
         <field name="inherit_id" ref="base.view_res_bank_form"/>
         <field name="arch" type="xml">
-                 <xpath expr="//field[@name='bic']" position="attributes">
-                         <attribute name ="string">IFSC Code</attribute>
-                 </xpath>
+            <xpath expr="//field[@name='bic']" position="attributes">
+                <attribute name="string">IFSC Code</attribute>
+            </xpath>
         </field>
     </record>
-
-
+    <record id="hr_applicant_view_form_inherit_no_of_rounds" model="ir.ui.view">
+        <field name="name">hr.applicant.form.number.of.rounds</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='department_id']" position="after">
+                <field name="no_of_rounds" placeholder="Maximum 6.."/>
+            </xpath>
+        </field>
+    </record>
+    <record id="hr_applicant_view_form_inherit_no_of_rounds_invisible" model="ir.ui.view">
+        <field name="name">hr.applicant.form.number.of.rounds.invisible</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="recruitment_management.hr_applicant_view_form_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='no_of_rounds']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
 
 
 </odoo>
