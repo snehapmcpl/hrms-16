@@ -49,7 +49,7 @@ class ContractInvDup(models.Model):
 class PayslipChange(models.Model):
     _inherit = "hr.employee"
 
-    uan_number = fields.Char("Uan number")
+    uan_number = fields.Char("UAN Number")
 
     def action_offer_employee_view(self):
         print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
@@ -75,4 +75,9 @@ class PayslipChange(models.Model):
         # self.write({'preview': html})
         # return True
         # print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+
+
+
+
+
 
