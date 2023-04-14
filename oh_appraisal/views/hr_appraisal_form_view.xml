@@ -74,29 +74,31 @@
                                            attrs="{'invisible': [('hr_manager','=', False)], 'readonly':[('check_draft','!=', True)]}"/>
                                     <field name="hr_emp" attrs="{'readonly':[('check_draft','!=', True)]}"/>
                                     <seperator/>
-                                    <field name="emp_survey_id"
-                                           placeholder="Appraisal Form" nolabel="1"
-                                           attrs="{'invisible': [('hr_emp','=', False)],
-                                           'readonly':[('check_draft','!=', True)]}"/>
-                                    <field name="hr_colloborator" attrs="{'readonly':[('check_draft','!=', True)]}"/>
-                                    <field name="hr_colloborator_id"  widget="many2many_tags"
-                                           placeholder="Select Appraisal Reviewer" nolabel="1"
-                                           attrs="{'invisible': [('hr_colloborator','=', False)],
-                                           'readonly':[('check_draft','!=', True)]}"/>
-                                    <field name="colloborator_survey_id"
-                                           placeholder="Appraisal Form" nolabel="1"
-                                           attrs="{'invisible': [('hr_colloborator','=', False)],
-                                           'readonly':[('check_draft','!=',True)]}"/>
-                                    <field name="hr_colleague" attrs="{'readonly':[('check_draft','!=', True)],
-                                           'readonly':[('check_draft','!=', True)]}"/>
-                                    <field name="hr_colleague_id"  widget="many2many_tags"
-                                           placeholder="Select Appraisal Reviewer" nolabel="1"
-                                           attrs="{'invisible': [('hr_colleague','=', False)],
-                                           'readonly':[('check_draft','!=', True)]}"/>
-                                    <field name="colleague_survey_id"
-                                           placeholder="Appraisal Form" nolabel="1"
-                                           attrs="{'invisible': [('hr_colleague','=', False)],
-                                           'readonly':[('check_draft','!=', True)]}"/>
+                                    <div>
+                                        <field name="emp_survey_id"
+                                               placeholder="Appraisal Form" nolabel="1"
+                                               attrs="{'invisible': [('hr_emp','=', False)],
+                                               'readonly':[('check_draft','!=', True)]}"/>
+                                    </div>
+                                        <field name="hr_colloborator" attrs="{'readonly':[('check_draft','!=', True)]}"/>
+                                        <field name="hr_colloborator_id"  widget="many2many_tags"
+                                               placeholder="Select Appraisal Reviewer" nolabel="1"
+                                               attrs="{'invisible': [('hr_colloborator','=', False)],
+                                               'readonly':[('check_draft','!=', True)]}"/>
+                                        <field name="colloborator_survey_id"
+                                               placeholder="Appraisal Form" nolabel="1"
+                                               attrs="{'invisible': [('hr_colloborator','=', False)],
+                                               'readonly':[('check_draft','!=',True)]}"/>
+                                        <field name="hr_colleague" attrs="{'readonly':[('check_draft','!=', True)],
+                                               'readonly':[('check_draft','!=', True)]}"/>
+                                        <field name="hr_colleague_id"  widget="many2many_tags"
+                                               placeholder="Select Appraisal Reviewer" nolabel="1"
+                                               attrs="{'invisible': [('hr_colleague','=', False)],
+                                               'readonly':[('check_draft','!=', True)]}"/>
+                                        <field name="colleague_survey_id"
+                                               placeholder="Appraisal Form" nolabel="1"
+                                               attrs="{'invisible': [('hr_colleague','=', False)],
+                                               'readonly':[('check_draft','!=', True)]}"/>
                                 </group>
                             </page>
                         </notebook>
