@@ -5,12 +5,26 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/group[@name='has_work_permit']"
-                   position="attributes">
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/separator[@name='has_work_permit']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
-            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/group/field[@name='study_school']"
-                   position="after">
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/field[@name='visa_no']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/field[@name='permit_no']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/field[@name='visa_expire']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/field[@name='work_permit_expiration_date']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/field[@name='has_work_permit']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/field[@name='study_school']" position="after">
                 <group string="Medical Details">
                     <field name="height"/>
                     <field name="weight"/>

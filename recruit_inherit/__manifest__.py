@@ -7,10 +7,11 @@
     'sequence': 10,
     'description': """ """,
     'category': 'Recruitmenting',
-    'depends': ['recruitment_management', 'hr'],
+    'depends': ['recruitment_management', 'hr','Itax_calculation_master.hr_employee_form'],
     'data': [
         'views/emp_details.xml',
         'views/view_interview_form.xml',
+        '',
     ],
     'installable': True,
     'application': True,
