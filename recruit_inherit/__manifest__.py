@@ -11,7 +11,6 @@
     'data': [
         'views/emp_details.xml',
         'views/view_interview_form.xml',
-        '',
     ],
     'installable': True,
     'application': True,
