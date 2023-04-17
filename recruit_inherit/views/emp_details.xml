@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_employee_medical_details" model="ir.ui.view">
+        <field name="name">hr.employee.form.emp</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/group[@name='has_work_permit']"
+                   position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/group/field[@name='study_school']"
+                   position="after">
+                <group string="Medical Details">
+                    <field name="height"/>
+                    <field name="weight"/>
+                    <field name="eye_sight" placeholder="Enter Left Eye and Right Eye"/>
+                    <field name="identification_mark" placeholder="Enter Identifications Marks 1 and 2"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

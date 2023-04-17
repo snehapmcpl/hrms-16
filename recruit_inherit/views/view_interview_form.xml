@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="hr_applicant_view_form_inherit_changes" model="ir.ui.view">
+        <field name="name">hr.applicant.form</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="recruitment_management.hr_applicant_view_form_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='duration']" position="after">
+                <field name="family_background1" attrs="{'readonly':[('interview_stage','!=','First Interview')]}"/>
+                <field name="economic_status1" attrs="{'readonly':[('interview_stage','!=','First Interview')]}"/>
+                <field name="educational_attain1" attrs="{'readonly':[('interview_stage','!=','First Interview')]}"/>
+                <field name="subject_knowledge1" attrs="{'readonly':[('interview_stage','!=','First Interview')]}"/>
+                <field name="work_experience1" attrs="{'readonly':[('interview_stage','!=','First Interview')]}"/>
+                <field name="hobbies1" attrs="{'readonly':[('interview_stage','!=','First Interview')]}"/>
+                <field name="political_antecedents1" attrs="{'readonly':[('interview_stage','!=','First Interview')]}"/>
+                <field name="expected_remun1" attrs="{'readonly':[('interview_stage','!=','First Interview')]}"/>
+                <field name="join_duty1" attrs="{'readonly':[('interview_stage','!=','First Interview')]}"/>
+                <field name="remarks1" attrs="{'readonly':[('interview_stage','!=','First Interview')]}"/>
+            </xpath>
+            <xpath expr="//field[@name='hire']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='hold']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='proceed_no_further']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='duration2']" position="after">
+                <field name="family_background2" attrs="{'readonly':[('interview_stage','!=','Second Interview')]}"/>
+                <field name="economic_status2" attrs="{'readonly':[('interview_stage','!=','Second Interview')]}"/>
+                <field name="educational_attain2" attrs="{'readonly':[('interview_stage','!=','Second Interview')]}"/>
+                <field name="subject_knowledge2" attrs="{'readonly':[('interview_stage','!=','Second Interview')]}"/>
+                <field name="work_experience2" attrs="{'readonly':[('interview_stage','!=','Second Interview')]}"/>
+                <field name="hobbies2" attrs="{'readonly':[('interview_stage','!=','Second Interview')]}"/>
+                <field name="political_antecedents2" attrs="{'readonly':[('interview_stage','!=','Second Interview')]}"/>
+                <field name="expected_remun2" attrs="{'readonly':[('interview_stage','!=','Second Interview')]}"/>
+                <field name="join_duty2" attrs="{'readonly':[('interview_stage','!=','Second Interview')]}"/>
+                <field name="remarks2" attrs="{'readonly':[('interview_stage','!=','Second Interview')]}"/>
+            </xpath>
+            <xpath expr="//field[@name='hire2']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='hold2']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='proceed_no_further2']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
