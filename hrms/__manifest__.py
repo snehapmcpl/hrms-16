@@ -12,7 +12,7 @@
    'data': [
       'security/ir.model.access.csv',
       # 'data/salary_rule_add.xml',
-      # 'views/empsalarybreakup.xml',
+      'views/empsalarybreakup.xml',
       'views/salary_rule_inherit.xml',
       'views/pf_and_esi_settings.xml',
    ],
