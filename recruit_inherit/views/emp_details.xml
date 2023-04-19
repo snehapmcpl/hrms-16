@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_employee_medical_details" model="ir.ui.view">
+        <field name="name">hr.employee.form.emp</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/separator[@name='has_work_permit']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/field[@name='visa_no']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/field[@name='permit_no']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/field[@name='visa_expire']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/field[@name='work_permit_expiration_date']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/field[@name='has_work_permit']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group/field[@name='study_school']" position="after">
+                <group string="Medical Details">
+                    <field name="height"/>
+                    <field name="weight"/>
+                    <field name="eye_sight" placeholder="Enter Left Eye and Right Eye"/>
+                    <field name="identification_mark" placeholder="Enter Identifications Marks 1 and 2"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
